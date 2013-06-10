@@ -1,0 +1,9 @@
+@(loggedInUser : User)
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <a class="brand" href="@routes.Application.index()">Arche GUI</a>
+        <p class="navbar-text pull-right">
+            @loggedInUser.fullName <a href="@routes.Application.logout()">Logout</a>
+        </p>
+    </div>
+</div>
