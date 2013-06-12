@@ -12,16 +12,16 @@ create table archetype (
   constraint pk_archetype primary key (id))
 ;
 
-create table user (
+create table benutzer (
   accountname               varchar(255) not null,
   password                  varchar(255),
   full_name                 varchar(255),
-  constraint pk_user primary key (accountname))
+  constraint pk_benutzer primary key (accountname))
 ;
 
 create sequence archetype_seq;
 
-create sequence user_seq;
+create sequence benutzer_seq;
 
 
 
@@ -30,9 +30,9 @@ create sequence user_seq;
 
 drop table if exists archetype cascade;
 
-drop table if exists user cascade;
+drop table if exists benutzer cascade;
 
 drop sequence if exists archetype_seq;
 
-drop sequence if exists user_seq;
+drop sequence if exists benutzer_seq;
 
