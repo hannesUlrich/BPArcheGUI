@@ -18,5 +18,4 @@ public class Application extends Controller {
         flash("success","You've been logged out");
         return redirect(routes.LoginController.login());
     }
-
 }
