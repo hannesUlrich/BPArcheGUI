@@ -2,8 +2,16 @@ package models;
 
 import java.util.List;
 
-public class Archetype {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+import play.db.ebean.Model;
+import play.db.ebean.Model.Finder;
+
+@Entity
+public class Archetype extends Model {
+
+	@Id
 	private String id;
 	private String name;
 	private String purpose;
@@ -67,4 +75,8 @@ public class Archetype {
 		this.name = name;
 	}
 
+	public static Finder<String,Archetype> find = new Finder<String,Archetype>(
+            String.class, Archetype.class
+    );
+	
 }
