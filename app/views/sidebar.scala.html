@@ -1,9 +1,17 @@
+@(names: List[Archetype])
 <!DOCTYPE html>
 <html>
 <head>
   <title></title>
 </head>
 <body>
-    <p><a href="#" class="btn">Sidebar</a></p>
+	<div class="well sidebar-nav">
+		<ul class="nav nav-list">
+			<li class="nav-header">Archetypes</li>
+			@for(a <- names) {
+		  	<li>@a.getName()</li>
+			} 
+		</ul>
+	</div>
 </body>
 </html>
