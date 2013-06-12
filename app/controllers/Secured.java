@@ -8,7 +8,7 @@ import play.mvc.Security;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Crassus
+ * Benutzer: Crassus
  * Date: 08.06.13
  * Time: 12:01
  * To change this template use File | Settings | File Templates.

@@ -3,25 +3,36 @@
 
 # --- !Ups
 
-create table user (
+create table archetype (
+  id                        varchar(255) not null,
+  name                      varchar(255),
+  purpose                   varchar(255),
+  usage                     varchar(255),
+  misusage                  varchar(255),
+  constraint pk_archetype primary key (id))
+;
+
+create table benutzer (
   accountname               varchar(255) not null,
   password                  varchar(255),
   full_name                 varchar(255),
-  constraint pk_user primary key (accountname))
+  constraint pk_benutzer primary key (accountname))
 ;
 
-create sequence user_seq;
+create sequence archetype_seq;
+
+create sequence benutzer_seq;
 
 
 
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+drop table if exists archetype cascade;
 
-drop table if exists user;
+drop table if exists benutzer cascade;
 
-SET REFERENTIAL_INTEGRITY TRUE;
+drop sequence if exists archetype_seq;
 
-drop sequence if exists user_seq;
+drop sequence if exists benutzer_seq;
 
