@@ -27,11 +27,10 @@ public class Global extends GlobalSettings {
     
     public void checkingArchetypes() {
     	ArrayList<File> files = Helper.checkFiles(new File(Helper.getCurrentDir()+"resource/"));
-		System.out.println();
 		for (File aFile : files) {
 			Components comp = new Components(Helper.getCurrentDir()+"resource/"+aFile.getName());
 			try {
-				Module m = comp.getArchetype(0);
+				Module m = comp.getArchetype(aFile.getName());
 				String id = m.getDataElement().get(0).getValue("id");
 				String name = Helper.getArcheName(aFile.getName());
 				String purpose = m.getDataElement().get(0).getValue("purpose");
@@ -40,9 +39,13 @@ public class Global extends GlobalSettings {
 				Archetype arche = new Archetype( id, name, purpose, usage, misusage);
 				ArrayList<Object> temp = new ArrayList<Object>();
 				temp.add(Helper.decideWhichType(m.getDataElement().get(0).getValue("elementType")));
+				if (m.getDataElement().get(0).getValue("elementType").equals("mtQuantity")) {
+					temp.add(m.getChoices());
+					Logger.error(temp.toString());
+					}
 				arche.save();
 			} catch (Exception e) {
-				System.err.println("failed to generate Archetype objects");
+				Logger.error("failed to generate Archetype objects");
 			}
 		}
     }
