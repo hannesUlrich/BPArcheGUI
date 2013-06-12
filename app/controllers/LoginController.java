@@ -1,14 +1,13 @@
 package controllers;
 
-import models.User;
-import play.*;
+import models.Benutzer;
 import play.data.*;
 import play.mvc.*;
 import views.html.*;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Crassus
+ * Benutzer: Crassus
  * Date: 08.06.13
  * Time: 12:12
  * To change this template use File | Settings | File Templates.
@@ -38,7 +37,7 @@ public class LoginController extends Controller{
         public String password;
 
         public String validate() {
-            if (User.authenticate(accountname, password) == null) {
+            if (Benutzer.authenticate(accountname, password) == null) {
                 return "Invalid user or password";
             }
             return null;
