@@ -1,4 +1,4 @@
-@(loggedInUser: User)(content: Html)
+@(loggedInUser: User,names: List[Archetype])
 
 <!DOCTYPE html>
 
@@ -18,11 +18,11 @@
         @views.html.navbar.render(loggedInUser)
         <div class="container-fluid">
             <div class="row-fluid">
-                <div class="span3">
-                    @views.html.sidebar.render()
+                <div class="span2">
+                    @views.html.sidebar.render(names)
                 </div>
-                <div class="span9">
-                    @content
+                <div class="span10">
+                    @views.html.mainFrame.render()
                 </div>
             </div>
         </div>

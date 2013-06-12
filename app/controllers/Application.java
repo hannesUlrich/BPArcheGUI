@@ -1,5 +1,9 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import models.Archetype;
 import models.User;
 import play.*;
 import play.data.*;
@@ -10,7 +14,9 @@ public class Application extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result index() {
-        return ok(index.render(User.find.byId(request().username())));
+    	User user = User.find.byId(request().username());
+    	List<Archetype> names = Archetype.find.all();
+        return ok(index.render(user,names));
     }
 
     public static Result logout(){
