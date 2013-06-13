@@ -1,16 +1,13 @@
 package controllers;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import models.Archetype;
 import models.Benutzer;
-import play.mvc.*;
-import utils.Components;
-import utils.Helper;
-import utils.Module;
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import play.mvc.Security;
+import views.html.index;
 
 public class Application extends Controller {
 
@@ -20,6 +17,7 @@ public class Application extends Controller {
     	List<Archetype> names = Archetype.find.all();
     	
     	for(Archetype a : names) {
+    		System.out.println(a.getName());
     		System.out.println(a.getElements());
     	}
     	

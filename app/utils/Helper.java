@@ -7,6 +7,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import models.Element;
+
 /**
  * This class contains helper methods which are used by the controller
  */
@@ -176,15 +178,19 @@ public class Helper {
 		return Short.parseShort(a.trim());
 	}
 	
-	public static Object decideWhichType(String type) {
+	public static Element decideWhichType(int id, String type, List<String> choices) {
 		if (type.equalsIgnoreCase("mtBoolean")) {
-			return new Boolean(false);
+			return new Element(id, "boolean");
 		} else if (type.equalsIgnoreCase("mtString")) {
-			return new String();
+			return new Element(id, "String");
 		} else if (type.equalsIgnoreCase("mtQuantity")) {
-			return new Integer(0);
+			Element e = new Element(id, "int");
+			e.setChoices(choices);
+			return e;
 		} else if (type.equalsIgnoreCase("mtStringlist")) {
-			return new java.util.ArrayList<String>();
+			Element e = new Element(id, "mtStringlist");
+			e.setChoices(choices);
+			return e;
 		} else {
 			return null;
 		}

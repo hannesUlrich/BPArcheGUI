@@ -2,8 +2,12 @@ package models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
@@ -12,12 +16,13 @@ import play.db.ebean.Model.Finder;
 public class Archetype extends Model {
 
 	@Id
-	private String id;
-	private String name;
-	private String purpose;
-	private String usage;
-	private String misusage;
-	private List<Object> elements;
+	public String id;
+	public String name;
+	public String purpose;
+	public String usage;
+	public String misusage;
+	@OneToMany(mappedBy="archetype", cascade=CascadeType.ALL)
+	public List<Element> elements;
 
 	public Archetype(String id, String name, String purpose, String usage, String misusage) {
 		this.id = id;
@@ -59,11 +64,11 @@ public class Archetype extends Model {
 		this.id = id;
 	}
 
-	public List<Object> getElements() {
+	public List<Element> getElements() {
 		return elements;
 	}
 
-	public void setElements(List<Object> elements) {
+	public void setElements(List<Element> elements) {
 		this.elements = elements;
 	}
 
@@ -78,5 +83,9 @@ public class Archetype extends Model {
 	public static Finder<String,Archetype> find = new Finder<String,Archetype>(
             String.class, Archetype.class
     );
+	
+	public String toString() {
+		return id+" "+name+" "+elements;
+	}
 	
 }
