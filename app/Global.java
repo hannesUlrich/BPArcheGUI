@@ -32,7 +32,7 @@ public class Global extends GlobalSettings {
 			Components comp = new Components(Helper.getCurrentDir()+"resource/"+aFile.getName());
 			try {
 				Module m = comp.getArchetype(Helper.extractFileNameWithoutEnding(aFile.getName()));
-				String id = m.getDataElement().get(0).;
+				String id = m.getDataElement().get(0).getValue("id");
 				System.out.println(id);
 				String name = Helper.getArcheName(aFile.getName());
 				System.out.println(name);
