@@ -2,4 +2,4 @@ This is a Play 2.1 application
 =====================================
 
 This is a proof-of-concept realization of the two-model-approach of the CEN-13606.  
-The web application takes Archetypes and extract all needed informations for a successful workflow
+The web application takes Archetypes and extract all needed informations for a successful representation. 
