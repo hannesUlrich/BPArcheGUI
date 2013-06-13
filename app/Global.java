@@ -16,6 +16,8 @@ import models.*;
  */
 public class Global extends GlobalSettings {
 	
+	public static int count;
+	
     @Override
     public void onStart(Application app) {
         if(Benutzer.find.findRowCount()==0){
@@ -44,8 +46,9 @@ public class Global extends GlobalSettings {
 				System.out.println(misusage);
 				Archetype arche = new Archetype( id, name, purpose, usage, misusage);
 				List<Element> temp = new ArrayList<Element>();
-				//temp.add(Helper.decideWhichType(1, m.getDataElement().get(0).getValue("elementType"), m.getChoices()));
-				//System.out.println(temp);
+				temp.add(Helper.decideWhichType(count, m.getDataElement().get(0).getValue("elementType"), m.getChoices()));
+				count++;
+				System.out.println(temp);
 				arche.setElements(temp);
 				arche.save();
 			} catch (Exception e) {
