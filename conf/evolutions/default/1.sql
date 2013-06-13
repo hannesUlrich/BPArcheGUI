@@ -28,9 +28,13 @@ create sequence benutzer_seq;
 
 # --- !Downs
 
-drop table if exists archetype cascade;
+SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists benutzer cascade;
+drop table if exists archetype;
+
+drop table if exists benutzer;
+
+SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists archetype_seq;
 

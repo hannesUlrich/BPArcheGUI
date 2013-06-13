@@ -31,7 +31,7 @@ public class Global extends GlobalSettings {
 		for (File aFile : files) {
 			Components comp = new Components(Helper.getCurrentDir()+"resource/"+aFile.getName());
 			try {
-				Module m = comp.getArchetype(0);
+				Module m = comp.getArchetype(Helper.extractFileNameWithoutEnding(aFile.getName()));
 				String id = m.getDataElement().get(0).getValue("id");
 				String name = Helper.getArcheName(aFile.getName());
 				String purpose = m.getDataElement().get(0).getValue("purpose");
@@ -39,6 +39,7 @@ public class Global extends GlobalSettings {
 				String misusage = m.getDataElement().get(0).getValue("misuse");
 				Archetype arche = new Archetype( id, name, purpose, usage, misusage);
 				ArrayList<Object> temp = new ArrayList<Object>();
+				System.out.println(m.getDataElement().get(0).getValue("elementType"));
 				temp.add(Helper.decideWhichType(m.getDataElement().get(0).getValue("elementType")));
 				arche.save();
 			} catch (Exception e) {

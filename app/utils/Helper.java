@@ -37,6 +37,12 @@ public class Helper {
 		return aFile.getName();
 	}
 
+	public static String extractFileNameWithoutEnding(String aPath) {
+		File aFile = new File(aPath);
+		String tmp = aFile.getName();
+		return tmp.substring(0, tmp.lastIndexOf("."));
+		}
+	
 	/**
 	 * @param aPath path to specific file
 	 * @return returns the file path of a file
