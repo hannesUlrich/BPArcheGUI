@@ -14,3 +14,6 @@ GET     /login                      controllers.LoginController.login()
 POST    /login                      controllers.LoginController.authenticate()
 # Logout weiterleitung
 GET     /logout                     controllers.Application.logout()
+
+#
+GET     /description/:archetype      controllers.Application.showArchetypeModal(archetype :String)

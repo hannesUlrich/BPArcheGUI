@@ -1,49 +1,35 @@
 @(names: List[Archetype])
 <!DOCTYPE html>
+
 <html>
-<head>
-  <title></title>
-</head>
 <body>
 	<div class="well sidebar-nav">
 		<ul class="nav nav-list">
 			<li class="nav-header">Archetypes</li>
 			@for(a <- names) {
-		  	<li> <a href="#">@a.getName()<button class="btn btn-mini pull-right" data-toggle="modal" data-target="#@a.getName"><i class="icon-info-sign"></i></button></a></li>
+		  	<li> <a href="#">@a.getName</a></li>
+            <li><a href="description/@a.getId" data-target="#myModal" data-toggle="modal">Launch demo modal</a></li>
 
-                    <!-- Modal -->
-                <div id="@a.getName" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="myModalLabel">Description</h3>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            <h3>Description of @a.getName</h3>
-                        </p>
-                        <p>
-                            Purpose:
-                            @a.getPurpose
-                        </p>
-                        <p>
-                            Usage:
-                            @a.getUsage
-                        </p>
-                        <p>
-                            Misusage:
-                            @a.getMisusage
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                        <button class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
 			}
 		</ul>
-
-
-
-	</div>
+    </div>
 </body>
 </html>
+<!-- Modal -->
+<div id="myModal" class=" modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Info</h3>
+    </div>
+    <div class="modal-body">
+        <p>Oh something went wrong, please try it again.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>​
+<script>
+    $('#myModal').on('show', function () {
+    $(this).removeData('modal');
+    });
+</script>

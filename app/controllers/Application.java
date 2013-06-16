@@ -8,6 +8,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.index;
+import views.html.modalRemote;
 
 public class Application extends Controller {
 
@@ -22,6 +23,10 @@ public class Application extends Controller {
     	}
     	
         return ok(index.render(benutzer,names));
+    }
+    public static Result showArchetypeModal(String archetypeId){
+        Archetype arche = Archetype.find.byId(archetypeId);
+        return ok(modalRemote.render(arche));
     }
 
     public static Result logout(){
