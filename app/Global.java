@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import play.*;
 import utils.*;
@@ -14,6 +15,8 @@ import models.*;
  * To change this template use File | Settings | File Templates.
  */
 public class Global extends GlobalSettings {
+	
+	public static int count;
 	
     @Override
     public void onStart(Application app) {
@@ -30,22 +33,23 @@ public class Global extends GlobalSettings {
 		for (File aFile : files) {
 			Components comp = new Components(Helper.getCurrentDir()+"resource/"+aFile.getName());
 			try {
-				Module m = comp.getArchetype(aFile.getName());
-				String id = m.getDataElement().get(0).getValue("id");
+				Module m = comp.getArchetype(Helper.extractFileNameWithoutEnding(aFile.getName()));
+				String id = m.getIdentifier();
 				String name = Helper.getArcheName(aFile.getName());
-				String purpose = m.getDataElement().get(0).getValue("purpose");
-				String usage = m.getDataElement().get(0).getValue("use");
-				String misusage = m.getDataElement().get(0).getValue("misuse");
+				String purpose = m.getPurpose();
+				String usage = m.getUse();
+				String misusage = m.getMisuse();
 				Archetype arche = new Archetype( id, name, purpose, usage, misusage);
-				ArrayList<Object> temp = new ArrayList<Object>();
-				temp.add(Helper.decideWhichType(m.getDataElement().get(0).getValue("elementType")));
-				if (m.getDataElement().get(0).getValue("elementType").equals("mtQuantity")) {
-					temp.add(m.getChoices());
-					Logger.error(temp.toString());
-					}
+				List<Element> temp = new ArrayList<Element>();
+				System.out.println("choi "+m.getChoices());
+				System.out.println("ele " + m.getDataElement().get(0).getValue("elementType"));
+				temp.add(Helper.decideWhichType(count, m.getDataElement().get(0).getValue("elementType"), m.getChoices()));
+				count++;
+				System.out.println(temp);
+				arche.setElements(temp);
 				arche.save();
 			} catch (Exception e) {
-				Logger.error("failed to generate Archetype objects");
+				System.err.println("failed to generate Archetype object: " + aFile.getName());
 			}
 		}
     }

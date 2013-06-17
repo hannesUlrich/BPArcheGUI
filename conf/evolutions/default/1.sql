@@ -19,9 +19,17 @@ create table benutzer (
   constraint pk_benutzer primary key (accountname))
 ;
 
+create table element (
+  id                        integer not null,
+  type                      varchar(255),
+  constraint pk_element primary key (id))
+;
+
 create sequence archetype_seq;
 
 create sequence benutzer_seq;
+
+create sequence element_seq;
 
 
 
@@ -34,9 +42,13 @@ drop table if exists archetype;
 
 drop table if exists benutzer;
 
+drop table if exists element;
+
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists archetype_seq;
 
 drop sequence if exists benutzer_seq;
+
+drop sequence if exists element_seq;
 

@@ -1,23 +1,28 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
 
 @Entity
 public class Archetype extends Model {
 
+	private static final long serialVersionUID = 1L;
 	@Id
-	private String id;
-	private String name;
-	private String purpose;
-	private String usage;
-	private String misusage;
-	private List<Object> elements;
+	public String id;
+	public String name;
+	public String purpose;
+	public String usage;
+	public String misusage;
+	@ManyToOne
+	public List<Element> elements;
 
 	public Archetype(String id, String name, String purpose, String usage, String misusage) {
 		this.id = id;
@@ -25,6 +30,7 @@ public class Archetype extends Model {
 		this.purpose = purpose;
 		this.usage = usage;
 		this.misusage = misusage;
+		elements = new ArrayList<Element>();
 	}
 
 	public String getPurpose() {
@@ -59,12 +65,12 @@ public class Archetype extends Model {
 		this.id = id;
 	}
 
-	public List<Object> getElements() {
+	public List<Element> getElements() {
 		return elements;
 	}
 
-	public void setElements(List<Object> elements) {
-		this.elements = elements;
+	public void setElements(List<Element> elements) {
+		this.elements.addAll(elements);
 	}
 
 	public String getName() {
@@ -78,5 +84,9 @@ public class Archetype extends Model {
 	public static Finder<String,Archetype> find = new Finder<String,Archetype>(
             String.class, Archetype.class
     );
+	
+	public String toString() {
+		return id+" "+name+" "+elements;
+	}
 	
 }

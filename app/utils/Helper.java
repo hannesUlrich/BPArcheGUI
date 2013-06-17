@@ -7,6 +7,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import models.Element;
+
 /**
  * This class contains helper methods which are used by the controller
  */
@@ -37,6 +39,12 @@ public class Helper {
 		return aFile.getName();
 	}
 
+	public static String extractFileNameWithoutEnding(String aPath) {
+		File aFile = new File(aPath);
+		String tmp = aFile.getName();
+		return tmp.substring(0, tmp.lastIndexOf("."));
+		}
+	
 	/**
 	 * @param aPath path to specific file
 	 * @return returns the file path of a file
@@ -170,15 +178,18 @@ public class Helper {
 		return Short.parseShort(a.trim());
 	}
 	
-	public static Object decideWhichType(String type) {
+	public static Element decideWhichType(int id, String type, List<String> choices) {
 		if (type.equalsIgnoreCase("mtBoolean")) {
-			return new Boolean(false);
-		} else if (type.equalsIgnoreCase("mtString")) {
-			return new String();
+			Element e = new Element(id, "boolean");
+			return e;
 		} else if (type.equalsIgnoreCase("mtQuantity")) {
-			return new Integer(0);
+			Element e = new Element(id, "int");
+			e.setChoices(choices);
+			return e;
 		} else if (type.equalsIgnoreCase("mtStringlist")) {
-			return new java.util.ArrayList<String>();
+			Element e = new Element(id, "mtStringlist");
+			e.setChoices(choices);
+			return e;
 		} else {
 			return null;
 		}

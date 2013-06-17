@@ -1,4 +1,5 @@
 package utils;
+
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class XMLReader {
 	}
 
 	public static <E> ArrayList<E> getList(Iterator<E> i) {
-		ArrayList<E> list = new ArrayList<E>();
+		ArrayList<E> list = new ArrayList<>();
 		while (i.hasNext()) {
 			list.add(i.next());
 		}
@@ -210,7 +211,7 @@ public class XMLReader {
 	 * @throws Exception
 	 */
 	private List<XMLEvent> getChild(XMLEventReader r, String elementName) throws Exception {
-		ArrayList<XMLEvent> attr = new ArrayList<XMLEvent>();
+		ArrayList<XMLEvent> attr = new ArrayList<>();
 		int counter = 0;
 		while (r.hasNext()) {
 			// get next event
@@ -248,7 +249,7 @@ public class XMLReader {
 	public ArrayList<XMLEvent> getChildren(String elementName) throws Exception {
 		XMLEventReader eventReader = createXMLReader();
 		// create an empty list
-		ArrayList<XMLEvent> attr = new ArrayList<XMLEvent>();
+		ArrayList<XMLEvent> attr = new ArrayList<>();
 		if (error) {
 			return attr;
 		}
@@ -283,7 +284,7 @@ public class XMLReader {
 	public ArrayList<XMLEvent> getChildren(XMLEvent e) throws Exception {
 		XMLEventReader eventReader = createXMLReader();
 		// create an empty list
-		ArrayList<XMLEvent> attr = new ArrayList<XMLEvent>();
+		ArrayList<XMLEvent> attr = new ArrayList<>();
 		if (error) {
 			return attr;
 		}
@@ -328,7 +329,7 @@ public class XMLReader {
 	public ArrayList<XMLEvent> getElement(boolean hasAttributes,
 			String elementName) throws Exception {
 		XMLEventReader eventReader = createXMLReader();
-		ArrayList<XMLEvent> events = new ArrayList<XMLEvent>();
+		ArrayList<XMLEvent> events = new ArrayList<>();
 		XMLEvent event = null;
 		if (error) {
 			return null;
@@ -430,7 +431,7 @@ public class XMLReader {
 	 */
 	public ArrayList<XMLEvent> getElementsByName(String elementName) throws Exception {
 		XMLEventReader eventReader = createXMLReader();
-		ArrayList<XMLEvent> events = new ArrayList<XMLEvent>();
+		ArrayList<XMLEvent> events = new ArrayList<>();
 		if (error) {
 			return events;
 		}
@@ -494,7 +495,7 @@ public class XMLReader {
 	 */
 	private List<XMLEvent> getFirstLevelChild(XMLEventReader r,
 			String elementName) throws Exception {
-		ArrayList<XMLEvent> attr = new ArrayList<XMLEvent>();
+		ArrayList<XMLEvent> attr = new ArrayList<>();
 		String startElementName = null;
 		XMLEvent storedStart = null;
 		int counter = 0;
@@ -540,7 +541,7 @@ public class XMLReader {
 	public ArrayList<XMLEvent> getFirstLevelChildren(String elementName) throws Exception {
 		XMLEventReader eventReader = createXMLReader();
 		// create an empty list
-		ArrayList<XMLEvent> attr = new ArrayList<XMLEvent>();
+		ArrayList<XMLEvent> attr = new ArrayList<>();
 		if (error) {
 			return attr;
 		}
