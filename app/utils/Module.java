@@ -32,6 +32,7 @@ public class Module {
 	private ArrayList<Definition> definitions;
 
 	private int id = 0;
+	private ArrayList<String> uses;
 
 	/**
 	 * initialize all lists and variables
@@ -46,6 +47,7 @@ public class Module {
 		choices = new ArrayList<>();
 		definitions = new ArrayList<>();
 		booleanSelections = new ArrayList<>();
+		uses = new ArrayList<>();
 	}
 
 	/**
@@ -81,7 +83,8 @@ public class Module {
 	}
 
 	/**
-	 * adds all choices
+	 * adds all choices. if choices is empty no elements are in the field
+	 * choices
 	 * 
 	 * @param choices
 	 */
@@ -91,6 +94,27 @@ public class Module {
 				this.choices.add(s);
 			}
 		}
+	}
+
+	/**
+	 * adds all uses as strings. To reference to module, store all components
+	 * and try to find the module
+	 * 
+	 * @param choices
+	 */
+	public void addUses(ArrayList<String> uses) {
+		for (String s : uses) {
+			if (this.uses.indexOf(s) < 0) {
+				this.uses.add(s);
+			}
+		}
+	}
+
+	/**
+	 * @return returns all uses
+	 */
+	public ArrayList<String> getUses() {
+		return uses;
 	}
 
 	/**
