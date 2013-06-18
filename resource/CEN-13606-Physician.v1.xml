@@ -1,2 +1,115 @@
 <?xml version="1.0"?>
-<moa:moArchetypes xmlns:moa="http://schemas.medical-objects.com.au/archetypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><archetype useage="openEHR" published="false"><concept><identifier>CEN-13606-Physician.v1</identifier><text /><nameOfCodingSystem /></concept><uses /><description><author /><submission><organisation><namespaceID>Medical-Objects</namespaceID><universalID /><universalIDType /></organisation><date>2013-02-06T15:20:17.337Z</date></submission><version>1</version><status>Draft</status><revision>1</revision><diagnosticServiceSection /><labNumberSuffix /><confidentialityCode>U</confidentialityCode><description lang="EN"><purpose>To document which person is recording.</purpose><use>To record the person who is doing the medical finding.</use><misuse>Don&apos;t note the family physician.</misuse></description><rights /><xslVersion>0.9</xslVersion><keyWords /><universalServiceID identifier="" text="" nameOfCodingSystem="" alternateIdentifier="" alternateText="" nameOfAlternateCodingSystem="" /></description><definition><DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="ENTRY" id="at0007" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false"><DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="items" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false" /><DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0007" elementType="mtStringlist" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange=""><subscribeTo><item>Dr. med Muster</item><item>Dr. Mustermann</item><item>Frau Musterfrau</item></subscribeTo><stringlist><HL7Datatypes>ST</HL7Datatypes><choices><item value="Dr. med Muster" /><item value="Dr. Mustermann" /><item value="Frau Musterfrau" /></choices></stringlist></DataElement></DataGroup></definition><ontology defaultOntology="SNOMED-CT"><termDefinitions><termDefinition language="en"><item localCode="at0002"><text>Body Weight</text><description>Body Weight</description><provenance /><qualityControl /></item><item localCode="at0003"><text>Weight</text><description>Weight</description><provenance /><qualityControl /></item><item localCode="at0004"><text>Body Height</text><description>Body Height</description><provenance /><qualityControl /></item><item localCode="at0005"><text>Height</text><description>Height</description><provenance /><qualityControl /></item><item localCode="at0006"><text>Ever Smoker</text><description>Ever Smoker</description><provenance /><qualityControl /></item><item localCode="at0007"><text>Recording physician</text><description>Recording physician</description><provenance /><qualityControl /></item></termDefinition></termDefinitions><termBindings /><constraintDefinitions /><constraintBindings /></ontology><presentation><css /><header /><footer /></presentation></archetype></moa:moArchetypes>
+<moa:moArchetypes xmlns:moa="http://schemas.medical-objects.com.au/archetypes"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <archetype useage="openEHR" published="false">
+        <concept>
+            <identifier>CEN-13606-Physician.v1</identifier>
+            <text/>
+            <nameOfCodingSystem/>
+        </concept>
+        <uses/>
+        <description>
+            <author/>
+            <submission>
+                <organisation>
+                    <namespaceID>Medical-Objects</namespaceID>
+                    <universalID/>
+                    <universalIDType/>
+                </organisation>
+                <date>2013-02-06T15:20:17.337Z</date>
+            </submission>
+            <version>1</version>
+            <status>Draft</status>
+            <revision>1</revision>
+            <diagnosticServiceSection/>
+            <labNumberSuffix/>
+            <confidentialityCode>U</confidentialityCode>
+            <description lang="EN">
+                <purpose>To document which person is recording.</purpose>
+                <use>To record the person who is doing the medical finding.</use>
+                <misuse>Don&apos;t note the family physician.</misuse>
+            </description>
+            <rights/>
+            <xslVersion>0.9</xslVersion>
+            <keyWords/>
+            <universalServiceID identifier="" text="" nameOfCodingSystem="" alternateIdentifier="" alternateText=""
+                                nameOfAlternateCodingSystem=""/>
+        </description>
+        <definition>
+            <DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="ENTRY" id="at0007"
+                       cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true"
+                       ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+                <DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="items"
+                           cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true"
+                           ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false"/>
+                <DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0007"
+                             elementType="mtStringlist" assumedValue="" hasReferenceRange="false" hasDate="False"
+                             referenceRange="">
+                    <subscribeTo>
+                        <item>Dr. med Muster</item>
+                        <item>Dr. Mustermann</item>
+                        <item>Frau Musterfrau</item>
+                    </subscribeTo>
+                    <stringlist>
+                        <HL7Datatypes>ST</HL7Datatypes>
+                        <choices>
+                            <item value="Dr. med Muster"/>
+                            <item value="Dr. Mustermann"/>
+                            <item value="Frau Musterfrau"/>
+                        </choices>
+                    </stringlist>
+                </DataElement>
+            </DataGroup>
+        </definition>
+        <ontology defaultOntology="SNOMED-CT">
+            <termDefinitions>
+                <termDefinition language="en">
+                    <item localCode="at0002">
+                        <text>Body Weight</text>
+                        <description>Body Weight</description>
+                        <provenance/>
+                        <qualityControl/>
+                    </item>
+                    <item localCode="at0003">
+                        <text>Weight</text>
+                        <description>Weight</description>
+                        <provenance/>
+                        <qualityControl/>
+                    </item>
+                    <item localCode="at0004">
+                        <text>Body Height</text>
+                        <description>Body Height</description>
+                        <provenance/>
+                        <qualityControl/>
+                    </item>
+                    <item localCode="at0005">
+                        <text>Height</text>
+                        <description>Height</description>
+                        <provenance/>
+                        <qualityControl/>
+                    </item>
+                    <item localCode="at0006">
+                        <text>Ever Smoker</text>
+                        <description>Ever Smoker</description>
+                        <provenance/>
+                        <qualityControl/>
+                    </item>
+                    <item localCode="at0007">
+                        <text>Recording physician</text>
+                        <description>Recording physician</description>
+                        <provenance/>
+                        <qualityControl/>
+                    </item>
+                </termDefinition>
+            </termDefinitions>
+            <termBindings/>
+            <constraintDefinitions/>
+            <constraintBindings/>
+        </ontology>
+        <presentation>
+            <css/>
+            <header/>
+            <footer/>
+        </presentation>
+    </archetype>
+</moa:moArchetypes>
