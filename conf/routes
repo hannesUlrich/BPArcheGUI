@@ -17,3 +17,5 @@ GET     /logout                     controllers.Application.logout()
 
 #
 GET     /description/:archetype      controllers.Application.showArchetypeModal(archetype :String)
+
+GET     /showForm/:archetype controllers.Application.showForm(archetype :String)

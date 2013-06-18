@@ -9,6 +9,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import views.html.index;
 import views.html.modalRemote;
+import views.html.showForm;
 
 public class Application extends Controller {
 
@@ -16,12 +17,6 @@ public class Application extends Controller {
     public static Result index() {
     	Benutzer benutzer = Benutzer.find.byId(request().username());
     	List<Archetype> names = Archetype.find.all();
-    	
-    	for(Archetype a : names) {
-    		System.out.println(a.getName());
-    		System.out.println(a.getElements());
-    	}
-    	
         return ok(index.render(benutzer,names));
     }
     public static Result showArchetypeModal(String archetypeId){
@@ -29,6 +24,13 @@ public class Application extends Controller {
         return ok(modalRemote.render(arche));
     }
 
+    public static Result showForm(String archetypeID) {
+    	Archetype arche = Archetype.find.byId(archetypeID);
+    	Benutzer benutzer = Benutzer.find.byId(request().username());
+    	List<Archetype> names = Archetype.find.all();
+    	return ok(main.render(benutzer,names,arche));
+   }
+    
     public static Result logout(){
         session().clear();
         flash("success","You've been logged out");
