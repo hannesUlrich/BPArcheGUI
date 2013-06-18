@@ -179,7 +179,10 @@ public class Helper {
 	}
 	
 	public static Element decideWhichType(int id, String type, List<String> choices) {
-		if (type.equalsIgnoreCase("mtBoolean")) {
+		if (type.equalsIgnoreCase("mtArchetype")) {
+			Element e = new Element(id, "archetype");
+			return e;
+		} else if (type.equalsIgnoreCase("mtBoolean")) {
 			Element e = new Element(id, "boolean");
 			return e;
 		} else if (type.equalsIgnoreCase("mtQuantity")) {

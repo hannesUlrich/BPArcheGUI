@@ -10,6 +10,28 @@ public class Components {
 
 	private XMLReader reader;
 	private ArrayList<Module> archetypes;
+	private Module main;
+
+	/**
+	 * @return returns the current directory of execution
+	 */
+	public static String getCurrentDir() {
+		File tmp = new File("");
+		return includeTrailingBackslash(tmp.getAbsolutePath());
+	}
+
+	/**
+	 * @param aPath
+	 *            path to specific file
+	 * @return the filepath with file separator at the end
+	 */
+	public static String includeTrailingBackslash(String aPath) {
+		if (aPath.charAt(aPath.length() - 1) != System.getProperty(
+				"file.separator").charAt(0)) {
+			return aPath + System.getProperty("file.separator");
+		}
+		return aPath;
+	}
 
 	public static String extractFileName(String aPath) {
 		File aFile = new File(aPath);
@@ -18,14 +40,12 @@ public class Components {
 	}
 
 	public static void main(String[] args) {
-		File f = new File("E:\\Programme\\Eclipse\\workspace\\XML\\height.xml");
+		ArrayList<Components> list = new ArrayList<>();
 		Components c = new Components(
 				"E:\\Programme\\Eclipse\\workspace\\XML\\height.xml");
-		try {
-			Module m = c.getArchetype(0);
-			System.out
-					.println(extractFileName("E:\\Programme\\Eclipse\\workspace\\XML\\height.xml"));
+		System.out.println(c.getMainModule());
 
+		try {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -109,6 +129,7 @@ public class Components {
 			Map elements = reader.getAttributes("DataElement");
 			ArrayList<XMLEvent> definitions = reader
 					.getFirstLevelChildren("termDefinition");
+			ArrayList<XMLEvent> uses = reader.getFirstLevelChildren("uses");
 
 			// store the identifier tag for each archetype
 			ArchetypeIdentifier id = new ArchetypeIdentifier();
@@ -144,6 +165,16 @@ public class Components {
 					if (reader.isRoot(archetype, tmp)) {
 						module.setPurpose(reader.getValue(tmp));
 					}
+				}
+
+				ArrayList<String> tmpList = new ArrayList<>();
+				for (XMLEvent tmp : uses) {
+					if (reader.isRoot(archetype, tmp)) {
+						tmpList.add(reader.getValue(tmp));
+					}
+				}
+				if (!tmpList.isEmpty()) {
+					module.addUses(tmpList);
 				}
 
 				// get use description
@@ -232,9 +263,98 @@ public class Components {
 				}
 
 				archetypes.add(module);
+				// save the main module of this module collection
+				if (module.getIdentifier().equals(extractFileName(path))) {
+					// main module is identified by the equality of identifier
+					// and files name
+					main = module;
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * get all archetypes that are used in the main archetype. if the archetype
+	 * doesnt use any (other) archetype this function returns an empty list.
+	 * 
+	 * @return all uses
+	 */
+	public ArrayList<Module> getUses() {
+		ArrayList<String> uses = main.getUses();
+		ArrayList<Module> included = new ArrayList<>();
+		for (Module m : archetypes) {
+			// main archetype?
+			if (m.getIdentifier().equals(main.getIdentifier())) {
+				continue;
+			}
+
+			// archetype included in the archetype collection?
+			if (uses.contains(m.getIdentifier())) {
+				included.add(m);
+			}
+		}
+		return included;
+	}
+
+	/**
+	 * get all archetypes that are not included in the main archetype and the
+	 * file relatively. You will get the archetypes identifier to load a new
+	 * component.
+	 * 
+	 * @return returns an empty list if there are no archetypes left.
+	 */
+	public ArrayList<String> getNotIncluded() {
+		ArrayList<String> uses = main.getUses();
+		ArrayList<String> notIncluded = new ArrayList<>();
+		for (Module m : archetypes) {
+			if (m.getIdentifier().equals(main.getIdentifier())) {
+				continue;
+			}
+			if (uses.contains(m.getIdentifier())) {
+				continue;
+			} else {
+				notIncluded.add(m.getIdentifier());
+			}
+		}
+		return notIncluded;
+	}
+
+	/**
+	 * returns true if the main archetype contains all of its uses.
+	 * 
+	 * @return false if there are archetypes that are not within the archetypes
+	 *         list
+	 */
+	public boolean hasAllUses() {
+		ArrayList<String> uses = main.getUses();
+		ArrayList<String> notIncluded = new ArrayList<>();
+		for (Module m : archetypes) {
+			if (m.getIdentifier().equals(main.getIdentifier())) {
+				continue;
+			}
+			if (uses.contains(m.getIdentifier())) {
+				continue;
+			} else {
+				notIncluded.add(m.getIdentifier());
+			}
+		}
+		return notIncluded.isEmpty();
+	}
+
+	/**
+	 * @return returns the archetype with the identifier that is equal to the
+	 *         filename
+	 */
+	public Module getMainModule() {
+		return main;
+	}
+
+	/**
+	 * @return the number of the archetypes stored in this class
+	 */
+	public int size() {
+		return archetypes.size();
 	}
 }
