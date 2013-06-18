@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.List;
 
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.Main;
 
 import models.Archetype;
 import models.Benutzer;
@@ -18,6 +17,7 @@ public class Application extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result index() {
+    	response().setCookie("user", request().username());
     	Benutzer benutzer = Benutzer.find.byId(request().username());
     	List<Archetype> names = Archetype.find.all();
         return ok(index.render(benutzer,names));
@@ -29,7 +29,7 @@ public class Application extends Controller {
 
     public static Result showForm(String archetypeID) {
     	Archetype arche = Archetype.find.byId(archetypeID);
-    	Benutzer benutzer = Benutzer.find.byId(request().username());
+    	Benutzer benutzer = Benutzer.find.byId(session("accountname"));
     	List<Archetype> names = Archetype.find.all();
     	return ok(main.render(benutzer,names,arche));
    }
