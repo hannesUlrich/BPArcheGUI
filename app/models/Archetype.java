@@ -3,10 +3,13 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import play.db.ebean.Model;
 
 @Entity
@@ -88,7 +91,11 @@ public class Archetype extends Model {
 	}
 
 	public void setUsedArchetypes(List<String> usedArchetypes) {
-		this.usedArchetypes.addAll(usedArchetypes);
+		this.usedArchetypes = usedArchetypes;
+	}
+	
+	public void addUsedArchetypeId(String id) {
+		this.usedArchetypes.add(id);
 	}
 
 	public static Finder<String,Archetype> find = new Finder<String,Archetype>(
@@ -97,10 +104,6 @@ public class Archetype extends Model {
 	
 	public String toString() {
 		return id+" "+name+" "+elements;
-	}
-
-	public void addUsedArchetypeId(String identifier) {
-		usedArchetypes.add(identifier);
 	}
 	
 }
