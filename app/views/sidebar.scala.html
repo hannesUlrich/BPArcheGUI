@@ -7,8 +7,8 @@
 		<ul class="nav nav-list">
 			<li class="nav-header">Archetypes</li>
 			@for(a <- names) {
-		  	<li><a href="#">@a.getName</a></li>
-            <li><a href="description/@a.getId" class="pull-right" data-target="#myModal" data-toggle="modal"><i class="icon-info-sign"></i></a></li>
+		  	<li><a href="description/@a.getId" class="pull-right" data-target="#myModal" data-toggle="modal"><i class="icon-info-sign"></i></a><a href="#">@a.getName</a> </li>
+
 			}
 		</ul>
     </div>
