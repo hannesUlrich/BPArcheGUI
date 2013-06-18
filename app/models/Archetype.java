@@ -98,5 +98,9 @@ public class Archetype extends Model {
 	public String toString() {
 		return id+" "+name+" "+elements;
 	}
+
+	public void addUsedArchetypeId(String identifier) {
+		usedArchetypes.add(identifier);
+	}
 	
 }
