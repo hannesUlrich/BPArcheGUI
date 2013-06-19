@@ -22,7 +22,7 @@ public class Archetype extends Model {
 	public String purpose;
 	public String usage;
 	public String misusage;
-	@ManyToOne
+	@OneToMany
 	public List<Element> elements;
 	
 	@ElementCollection
@@ -71,11 +71,18 @@ public class Archetype extends Model {
 	}
 
 	public List<Element> getElements() {
+		System.out.println("elem " + elements);
 		return elements;
 	}
 
+	public void addElement(Element element) {
+		elements.add(element);
+		save();
+	}
+	
 	public void setElements(List<Element> elements) {
 		this.elements.addAll(elements);
+		save();
 	}
 
 	public String getName() {
@@ -92,10 +99,12 @@ public class Archetype extends Model {
 
 	public void setUsedArchetypes(List<String> usedArchetypes) {
 		this.usedArchetypes = usedArchetypes;
+		save();
 	}
 	
 	public void addUsedArchetypeId(String id) {
 		this.usedArchetypes.add(id);
+		save();
 	}
 
 	public static Finder<String,Archetype> find = new Finder<String,Archetype>(

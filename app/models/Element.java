@@ -23,16 +23,18 @@ public class Element extends Model {
 	public int id;
 	public String type;
 	
-	@OneToMany
+	@ManyToOne
 	public Archetype archetype;
 	
 	@ElementCollection
 	private List<String> choices;
 
-	public Element(int name, String type) {
+	public Element(Archetype arche, int name, String type, ArrayList<String> choices) {
 		this.id = name;
 		this.type = type;
-		choices = new ArrayList<String>();
+		this.choices = choices;
+		this.archetype = arche;
+		save();
 	}
 
 	public int getId() {
@@ -57,6 +59,7 @@ public class Element extends Model {
 
 	public void setChoices(List<String> choices) {
 		this.choices.addAll(choices);
+		save();
 	}
 	
 	public static Finder<String,Element> find = new Finder<String,Element>(
@@ -64,7 +67,11 @@ public class Element extends Model {
     );
 	
 	public String toString() {
+		if (choices == null ) {
+			return String.valueOf(id) + " " + type;
+		} else {
 		return String.valueOf(id) + " " + type + " " + choices.toString();
+		}
 	}
 	
 }

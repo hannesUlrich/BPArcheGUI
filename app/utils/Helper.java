@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import models.Archetype;
 import models.Element;
 
 /**
@@ -178,20 +179,18 @@ public class Helper {
 		return Short.parseShort(a.trim());
 	}
 	
-	public static Element decideWhichType(int id, String type, List<String> choices) {
+	public static Element decideWhichType(Archetype arche, int id, String type, ArrayList<String> choices) {
 		if (type.equalsIgnoreCase("mtArchetype")) {
-			Element e = new Element(id, "archetype");
+			Element e = new Element(arche, id, "archetype", choices);
 			return e;
 		} else if (type.equalsIgnoreCase("mtBoolean")) {
-			Element e = new Element(id, "boolean");
+			Element e = new Element(arche, id, "boolean",choices);
 			return e;
 		} else if (type.equalsIgnoreCase("mtQuantity")) {
-			Element e = new Element(id, "int");
-			e.setChoices(choices);
+			Element e = new Element(arche, id, "int", choices);
 			return e;
 		} else if (type.equalsIgnoreCase("mtStringlist")) {
-			Element e = new Element(id, "mtStringlist");
-			e.setChoices(choices);
+			Element e = new Element(arche, id, "mtStringlist",choices);
 			return e;
 		} else {
 			return null;

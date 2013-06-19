@@ -22,6 +22,7 @@ create table benutzer (
 create table element (
   id                        integer not null,
   type                      varchar(255),
+  archetype_id              varchar(255),
   constraint pk_element primary key (id))
 ;
 
@@ -31,6 +32,8 @@ create sequence benutzer_seq;
 
 create sequence element_seq;
 
+alter table element add constraint fk_element_archetype_1 foreign key (archetype_id) references archetype (id) on delete restrict on update restrict;
+create index ix_element_archetype_1 on element (archetype_id);
 
 
 

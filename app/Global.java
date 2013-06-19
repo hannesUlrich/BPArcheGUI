@@ -40,18 +40,17 @@ public class Global extends GlobalSettings {
 				String usage = m.getUse();
 				String misusage = m.getMisuse();
 				Archetype arche = new Archetype( id, name, purpose, usage, misusage);
-				List<Element> temp = new ArrayList<Element>();
-				Element ele = Helper.decideWhichType(count, m.getDataElement().get(0).getValue("elementType"), m.getChoices());
+				arche.save();
+				Element ele = Helper.decideWhichType(arche ,count, m.getDataElement().get(0).getValue("elementType"), m.getChoices());
 				if (ele.type.equals("archetype")) {
 					ArrayList<Module> mods = comp.getUses();
 					for (Module mod : mods) {
 						arche.addUsedArchetypeId(mod.getIdentifier());
 					}
 				}
-				temp.add(ele);
+				System.out.println("elebeforesaving "+ele);
 				count++;
-				arche.setElements(temp);
-				arche.save();
+				arche.addElement(ele);
 			} catch (Exception e) {
 				System.err.println("failed to generate Archetype object: " + aFile.getName());
 			}
