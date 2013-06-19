@@ -1,10 +1,11 @@
-@(arche : Archetype)
-<body>
-    <h4>@arche.getId : @arche.getName</h4>
-    <h5>Purpose:</h5>
-    <p>@arche.getPurpose</p>
-    <h5>Usage:</h5>
-    <p>@arche.getUsage</p>
-    <h5>Misusage:</h5>
-    <p>@arche.getMisusage</p>
-</body>
+@(loggedInUser : Benutzer, names: List[Archetype], arche: Archetype)
+@main(loggedInUser, names){
+    <body>
+        <ul>
+        @for(ele <- arche.getElements ) {
+            <li> test  </li>
+        }
+        </ul>
+    </body>
+
+}

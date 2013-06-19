@@ -31,7 +31,7 @@ public class Application extends Controller {
     	Archetype arche = Archetype.find.byId(archetypeID);
     	Benutzer benutzer = Benutzer.find.byId(session("accountname"));
     	List<Archetype> names = Archetype.find.all();
-    	return ok(main.render(benutzer,names,arche));
+    	return ok(showForm.render(benutzer,names,arche));
    }
     
     public static Result logout(){
