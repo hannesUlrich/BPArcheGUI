@@ -179,21 +179,23 @@ public class Helper {
 		return Short.parseShort(a.trim());
 	}
 	
-	public static Element decideWhichType(Archetype arche, int id, String type, ArrayList<String> choices) {
+	public static int decideWhichType(Archetype arche, int id, String type, ArrayList<String> choices) {
 		if (type.equalsIgnoreCase("mtArchetype")) {
 			Element e = new Element(arche, id, "archetype", choices);
-			return e;
+			return e.id;
 		} else if (type.equalsIgnoreCase("mtBoolean")) {
-			Element e = new Element(arche, id, "boolean",choices);
-			return e;
+			Element e = new Element(arche, id, "boolean", choices);
+			return e.id;
 		} else if (type.equalsIgnoreCase("mtQuantity")) {
 			Element e = new Element(arche, id, "int", choices);
-			return e;
+			e.setChoices(choices);
+			return e.id;
 		} else if (type.equalsIgnoreCase("mtStringlist")) {
-			Element e = new Element(arche, id, "mtStringlist",choices);
-			return e;
+			Element e = new Element(arche, id, "mtStringlist", choices);
+			e.setChoices(choices);
+			return e.id;
 		} else {
-			return null;
+			return 0;
 		}
 	}
 	

@@ -15,10 +15,7 @@ import play.db.ebean.Model;
 @Entity
 public class Element extends Model {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3245154473889537432L;
+	private static final long serialVersionUID = 1L;
 	@Id
 	public int id;
 	public String type;
@@ -37,6 +34,13 @@ public class Element extends Model {
 		save();
 	}
 
+	public Element(Archetype arche, int name, String type) {
+		this.id = name;
+		this.type = type;
+		this.archetype = arche;
+		save();
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -62,8 +66,8 @@ public class Element extends Model {
 		save();
 	}
 	
-	public static Finder<String,Element> find = new Finder<String,Element>(
-            String.class, Element.class
+	public static Finder<Integer,Element> find = new Finder<Integer,Element>(
+            Integer.class, Element.class
     );
 	
 	public String toString() {

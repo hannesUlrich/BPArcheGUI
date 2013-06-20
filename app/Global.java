@@ -16,7 +16,7 @@ import models.*;
  */
 public class Global extends GlobalSettings {
 	
-	public static int count;
+	public static int count=1;
 	
     @Override
     public void onStart(Application app) {
@@ -41,7 +41,7 @@ public class Global extends GlobalSettings {
 				String misusage = m.getMisuse();
 				Archetype arche = new Archetype( id, name, purpose, usage, misusage);
 				arche.save();
-				Element ele = Helper.decideWhichType(arche ,count, m.getDataElement().get(0).getValue("elementType"), m.getChoices());
+				Element ele = Element.find.byId(Helper.decideWhichType(arche ,count, m.getDataElement().get(0).getValue("elementType"), m.getChoices()));
 				if (ele.type.equals("archetype")) {
 					ArrayList<Module> mods = comp.getUses();
 					for (Module mod : mods) {
