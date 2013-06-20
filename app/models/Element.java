@@ -7,8 +7,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import play.db.ebean.Model;
 
@@ -24,12 +22,12 @@ public class Element extends Model {
 	public Archetype archetype;
 	
 	@ElementCollection
-	private List<String> choices;
+	private List<String> choices = new ArrayList<String>();
 
 	public Element(Archetype arche, int name, String type, ArrayList<String> choices) {
 		this.id = name;
 		this.type = type;
-		this.choices = choices;
+		this.choices.addAll(choices);
 		this.archetype = arche;
 		save();
 	}
@@ -47,6 +45,7 @@ public class Element extends Model {
 
 	public void setId(int id) {
 		this.id = id;
+		update();
 	}
 
 	public String getType() {
@@ -55,6 +54,7 @@ public class Element extends Model {
 
 	public void setType(String type) {
 		this.type = type;
+		update();
 	}
 
 	public List<String> getChoices() {
@@ -63,7 +63,7 @@ public class Element extends Model {
 
 	public void setChoices(List<String> choices) {
 		this.choices.addAll(choices);
-		save();
+		update();
 	}
 	
 	public static Finder<Integer,Element> find = new Finder<Integer,Element>(

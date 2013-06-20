@@ -2,14 +2,12 @@ package controllers;
 
 import java.util.List;
 
-
 import models.Archetype;
 import models.Benutzer;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.index;
-import views.html.main;
 import views.html.modalRemote;
 import views.html.showForm;
 

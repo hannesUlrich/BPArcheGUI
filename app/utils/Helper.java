@@ -1,9 +1,7 @@
 package utils;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -188,11 +186,9 @@ public class Helper {
 			return e.id;
 		} else if (type.equalsIgnoreCase("mtQuantity")) {
 			Element e = new Element(arche, id, "int", choices);
-			e.setChoices(choices);
 			return e.id;
 		} else if (type.equalsIgnoreCase("mtStringlist")) {
 			Element e = new Element(arche, id, "mtStringlist", choices);
-			e.setChoices(choices);
 			return e.id;
 		} else {
 			return 0;

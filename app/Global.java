@@ -1,10 +1,14 @@
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
-import play.*;
-import utils.*;
-import models.*;
+import models.Archetype;
+import models.Benutzer;
+import models.Element;
+import play.Application;
+import play.GlobalSettings;
+import utils.Components;
+import utils.Helper;
+import utils.Module;
 
 
 /**
@@ -48,7 +52,6 @@ public class Global extends GlobalSettings {
 						arche.addUsedArchetypeId(mod.getIdentifier());
 					}
 				}
-				System.out.println("elebeforesaving "+ele);
 				count++;
 				arche.addElement(ele);
 			} catch (Exception e) {
