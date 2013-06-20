@@ -3,10 +3,11 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.ElementCollection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 
@@ -18,17 +19,19 @@ public class Element extends Model {
 	public int id;
 	public String type;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Archetype archetype;
 	
-	@ElementCollection
-	private List<String> choices = new ArrayList<String>();
+	@OneToMany
+	public List<Choice> choices = new ArrayList<Choice>();
 
 	public Element(Archetype arche, int name, String type, ArrayList<String> choices) {
 		this.id = name;
 		this.type = type;
-		this.choices.addAll(choices);
 		this.archetype = arche;
+		for (String id : choices) {
+			this.choices.add(new Choice(id, this));
+		}
 		save();
 	}
 
@@ -57,11 +60,11 @@ public class Element extends Model {
 		update();
 	}
 
-	public List<String> getChoices() {
+	public List<Choice> getChoices() {
 		return choices;
 	}
 
-	public void setChoices(List<String> choices) {
+	public void setChoices(List<Choice> choices) {
 		this.choices.addAll(choices);
 		update();
 	}

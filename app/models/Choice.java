@@ -1,30 +1,31 @@
 package models;
 
-import play.db.ebean.Model;
-
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Crassus
- * Date: 20.06.13
- * Time: 11:32
- * To change this template use File | Settings | File Templates.
- */
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import play.db.ebean.Model;
+
+
+
 public class Choice extends Model{
-    @Id
+   
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     public int id;
     public String choice;
-    @OneToMany
+    @ManyToOne
     public Element element;
 
 
-    public Choice(int id, String choice, Element element) {
-        this.id = id;
+    public Choice(String choice, Element element) {
         this.choice = choice;
         this.element = element;
+        save();
     }
 
     public static Finder<Integer, Choice> find = new Finder<Integer, Choice>(Integer.class,Choice.class);
