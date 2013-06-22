@@ -23,12 +23,13 @@ public class Element extends Model {
 	public Archetype archetype;
 	
 	@OneToMany
-	public List<Choice> choices = new ArrayList<Choice>();
+	public List<Choice> choices;
 
 	public Element(Archetype arche, int name, String type, ArrayList<String> choices) {
 		this.id = name;
 		this.type = type;
 		this.archetype = arche;
+		choices = new ArrayList<>();
 		for (String id : choices) {
 			this.choices.add(new Choice(id, this));
 		}
