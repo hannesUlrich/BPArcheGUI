@@ -44,7 +44,7 @@ public class Global extends GlobalSettings {
 				String usage = m.getUse();
 				String misusage = m.getMisuse();
 				Archetype arche = new Archetype( id, name, purpose, usage, misusage);
-				arche.save();
+				System.out.println("Im Global " + m.getChoices());
 				Element ele = Element.find.byId(Helper.decideWhichType(arche ,count, m.getDataElement().get(0).getValue("elementType"), m.getChoices()));
 				if (ele.type.equals("archetype")) {
 					ArrayList<Module> mods = comp.getUses();

@@ -30,8 +30,10 @@ public class Element extends Model {
 		this.type = type;
 		this.archetype = arche;
 		choices = new ArrayList<>();
+		System.out.println("Im Element: " + choices);
 		for (String id : choices) {
-			this.choices.add(new Choice(id, this));
+			Choice temp = new Choice(id,this);
+			this.choices.add(Choice.find.byId(temp.getId()));
 		}
 		save();
 	}
@@ -78,7 +80,11 @@ public class Element extends Model {
 		if (choices == null ) {
 			return String.valueOf(id) + " " + type;
 		} else {
-		return String.valueOf(id) + " " + type + " " + choices.toString();
+			String temp = String.valueOf(id) + " " + type + " ";
+			for (Choice choi : choices) {
+				temp.concat(choi.getChoice());
+			}
+		return temp;
 		}
 	}
 	

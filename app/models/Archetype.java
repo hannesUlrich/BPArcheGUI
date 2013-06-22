@@ -36,6 +36,7 @@ public class Archetype extends Model {
 		this.misusage = misusage;
 		elements = new ArrayList<Element>();
 		usedArchetypes = new ArrayList<String>();
+		save();
 	}
 
 	public String getPurpose() {
@@ -44,6 +45,7 @@ public class Archetype extends Model {
 
 	public void setPurpose(String purpose) {
 		this.purpose = purpose;
+		update();
 	}
 
 	public String getUsage() {
@@ -52,6 +54,7 @@ public class Archetype extends Model {
 
 	public void setUsage(String usage) {
 		this.usage = usage;
+		update();
 	}
 
 	public String getMisusage() {
@@ -60,6 +63,7 @@ public class Archetype extends Model {
 
 	public void setMisusage(String misusage) {
 		this.misusage = misusage;
+		update();
 	}
 
 	public String getId() {
@@ -68,21 +72,21 @@ public class Archetype extends Model {
 
 	public void setId(String id) {
 		this.id = id;
+		update();
 	}
 
 	public List<Element> getElements() {
-		System.out.println("elem " + elements);
 		return elements;
 	}
 
 	public void addElement(Element element) {
 		elements.add(element);
-		save();
+		update();
 	}
 	
 	public void setElements(List<Element> elements) {
 		this.elements.addAll(elements);
-		save();
+		update();
 	}
 
 	public String getName() {
@@ -91,6 +95,7 @@ public class Archetype extends Model {
 
 	public void setName(String name) {
 		this.name = name;
+		update();
 	}
 
 	public List<String> getUsedArchetypes() {
@@ -99,12 +104,12 @@ public class Archetype extends Model {
 
 	public void setUsedArchetypes(List<String> usedArchetypes) {
 		this.usedArchetypes = usedArchetypes;
-		save();
+		update();
 	}
 	
 	public void addUsedArchetypeId(String id) {
 		this.usedArchetypes.add(id);
-		save();
+		update();
 	}
 
 	public static Finder<String,Archetype> find = new Finder<String,Archetype>(
