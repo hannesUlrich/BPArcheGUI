@@ -15,6 +15,7 @@ import play.db.ebean.Model;
 public class Element extends Model {
 
 	private static final long serialVersionUID = 1L;
+	private static int count=1;
 	@Id
 	public int id;
 	public String type;
@@ -25,15 +26,17 @@ public class Element extends Model {
 	@OneToMany
 	public List<Choice> choices;
 
+	public Element() {}
+	
 	public Element(Archetype arche, int name, String type, ArrayList<String> choices) {
 		this.id = name;
 		this.type = type;
 		this.archetype = arche;
-		choices = new ArrayList<>();
-		System.out.println("Im Element: " + choices);
-		for (String id : choices) {
-			Choice temp = new Choice(id,this);
-			this.choices.add(Choice.find.byId(temp.getId()));
+		this.choices = new ArrayList<Choice>();
+		for (String text : choices) {
+			Choice temp = new Choice(count,text,this);
+			addChoice(temp);
+			count++;
 		}
 		save();
 	}
@@ -67,9 +70,15 @@ public class Element extends Model {
 		return choices;
 	}
 
-	public void setChoices(List<Choice> choices) {
-		this.choices.addAll(choices);
+	public void addChoice(Choice theNewOne) {
+		choices.add(theNewOne);
 		update();
+	}
+	
+	public void setChoices(int elementId ,ArrayList<Choice> choices) {
+		Element element = Element.find.ref(elementId);
+		element.choices.addAll(choices);
+		element.update();
 	}
 	
 	public static Finder<Integer,Element> find = new Finder<Integer,Element>(
@@ -81,8 +90,10 @@ public class Element extends Model {
 			return String.valueOf(id) + " " + type;
 		} else {
 			String temp = String.valueOf(id) + " " + type + " ";
-			for (Choice choi : choices) {
-				temp.concat(choi.getChoice());
+			List<Choice> databaseChoices = new ArrayList<Choice>();
+			databaseChoices = Choice.findChoicebyElement(id);
+			for (Choice choi : databaseChoices) {
+				temp+= choi.getChoice() + " ";
 			}
 		return temp;
 		}

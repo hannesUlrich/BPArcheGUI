@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import models.Archetype;
+import models.Choice;
 import models.Element;
 
 /**
@@ -178,7 +179,6 @@ public class Helper {
 	}
 	
 	public static int decideWhichType(Archetype arche, int id, String type, ArrayList<String> choices) {
-		System.out.println("Im Helper " + choices);
 		if (type.equalsIgnoreCase("mtArchetype")) {
 			Element e = new Element(arche, id, "archetype", choices);
 			return e.id;

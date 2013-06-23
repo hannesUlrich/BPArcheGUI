@@ -21,7 +21,7 @@ create table benutzer (
 
 create table choice (
   id                        integer not null,
-  choice                    varchar(255),
+  choice_string             varchar(255),
   element_id                integer,
   constraint pk_choice primary key (id))
 ;
