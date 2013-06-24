@@ -2,14 +2,12 @@ package controllers;
 
 import java.util.List;
 
-
 import models.Archetype;
 import models.Benutzer;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.index;
-import views.html.main;
 import views.html.modalRemote;
 import views.html.showForm;
 
@@ -31,7 +29,7 @@ public class Application extends Controller {
     	Archetype arche = Archetype.find.byId(archetypeID);
     	Benutzer benutzer = Benutzer.find.byId(session("accountname"));
     	List<Archetype> names = Archetype.find.all();
-    	return ok(main.render(benutzer,names,arche));
+    	return ok(showForm.render(benutzer,names,arche));
    }
     
     public static Result logout(){

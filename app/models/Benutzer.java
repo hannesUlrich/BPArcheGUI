@@ -13,7 +13,9 @@ import javax.persistence.Id;
  */
 @Entity
 public class Benutzer extends Model{
-    @Id
+
+	private static final long serialVersionUID = 1L;
+	@Id
     public String accountname;
     public String password;
     public String fullName;

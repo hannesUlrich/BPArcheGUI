@@ -3,11 +3,9 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
@@ -22,12 +20,15 @@ public class Archetype extends Model {
 	public String purpose;
 	public String usage;
 	public String misusage;
+	
 	@OneToMany
 	public List<Element> elements;
 	
 	@ElementCollection
 	public List<String> usedArchetypes;
 
+	public Archetype(){}
+	
 	public Archetype(String id, String name, String purpose, String usage, String misusage) {
 		this.id = id;
 		this.name = name;
@@ -36,6 +37,7 @@ public class Archetype extends Model {
 		this.misusage = misusage;
 		elements = new ArrayList<Element>();
 		usedArchetypes = new ArrayList<String>();
+		save();
 	}
 
 	public String getPurpose() {
@@ -44,6 +46,7 @@ public class Archetype extends Model {
 
 	public void setPurpose(String purpose) {
 		this.purpose = purpose;
+		update();
 	}
 
 	public String getUsage() {
@@ -52,6 +55,7 @@ public class Archetype extends Model {
 
 	public void setUsage(String usage) {
 		this.usage = usage;
+		update();
 	}
 
 	public String getMisusage() {
@@ -60,6 +64,7 @@ public class Archetype extends Model {
 
 	public void setMisusage(String misusage) {
 		this.misusage = misusage;
+		update();
 	}
 
 	public String getId() {
@@ -68,10 +73,10 @@ public class Archetype extends Model {
 
 	public void setId(String id) {
 		this.id = id;
+		update();
 	}
 
 	public List<Element> getElements() {
-		System.out.println("elem " + elements);
 		return elements;
 	}
 
@@ -82,7 +87,7 @@ public class Archetype extends Model {
 	
 	public void setElements(List<Element> elements) {
 		this.elements.addAll(elements);
-		save();
+		update();
 	}
 
 	public String getName() {
@@ -91,6 +96,7 @@ public class Archetype extends Model {
 
 	public void setName(String name) {
 		this.name = name;
+		update();
 	}
 
 	public List<String> getUsedArchetypes() {
@@ -99,7 +105,7 @@ public class Archetype extends Model {
 
 	public void setUsedArchetypes(List<String> usedArchetypes) {
 		this.usedArchetypes = usedArchetypes;
-		save();
+		update();
 	}
 	
 	public void addUsedArchetypeId(String id) {

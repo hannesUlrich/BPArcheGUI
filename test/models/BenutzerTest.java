@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+
 import org.junit.*;
 import play.test.*;
 
@@ -35,6 +37,15 @@ public class BenutzerTest extends WithApplication{
         Benutzer daniel = Benutzer.authenticate("daniel", "1234");
         Assert.assertNotNull(daniel);
         Assert.assertEquals("daniel", daniel.accountname);
+    }
+    
+    @Test
+    public void testChoices() {
+    	String archeID = new Archetype("1", "", "", "", "").id;
+    	ArrayList<String> choices = new ArrayList<String>();
+    	choices.add("Mr.");
+    	choices.add("Mrs.");
+    	Element element = new Element(Archetype.find.byId(archeID), 1, "boolean", choices);
     }
 
 }

@@ -39,18 +39,6 @@ public class Components {
 		return tmp.substring(0, tmp.lastIndexOf("."));
 	}
 
-	public static void main(String[] args) {
-		ArrayList<Components> list = new ArrayList<>();
-		Components c = new Components(
-				"E:\\Programme\\Eclipse\\workspace\\XML\\height.xml");
-		System.out.println(c.getMainModule());
-
-		try {
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	/**
 	 * @return return true if the loaded archetype contains more than one
 	 *         archetype
@@ -107,6 +95,7 @@ public class Components {
 	 * @param path
 	 *            file path to archetype xml
 	 */
+	@SuppressWarnings({ "unchecked"})
 	public Components(String path) {
 		archetypes = new ArrayList<>();
 		reader = new XMLReader(path);

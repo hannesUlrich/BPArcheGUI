@@ -1,4 +1,4 @@
-@(loggedInUser: Benutzer,names: List[Archetype], arche: Archetype)
+@(loggedInUser: Benutzer,names: List[Archetype])(body : Html)
 
 <!DOCTYPE html>
 
@@ -23,7 +23,7 @@
                     @views.html.sidebar.render(names)
                 </div>
                 <div class="span9">
-                    @views.html.mainFrame.render(arche)
+                    @body
                 </div>
             </div>
         </div>

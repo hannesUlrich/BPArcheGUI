@@ -1,10 +1,14 @@
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
-import play.*;
-import utils.*;
-import models.*;
+import models.Archetype;
+import models.Benutzer;
+import models.Element;
+import play.Application;
+import play.GlobalSettings;
+import utils.Components;
+import utils.Helper;
+import utils.Module;
 
 
 /**
@@ -16,7 +20,7 @@ import models.*;
  */
 public class Global extends GlobalSettings {
 	
-	public static int count;
+	public static int count=1;
 	
     @Override
     public void onStart(Application app) {
@@ -40,15 +44,14 @@ public class Global extends GlobalSettings {
 				String usage = m.getUse();
 				String misusage = m.getMisuse();
 				Archetype arche = new Archetype( id, name, purpose, usage, misusage);
-				arche.save();
-				Element ele = Helper.decideWhichType(arche ,count, m.getDataElement().get(0).getValue("elementType"), m.getChoices());
+				System.out.println("Im Global " + m.getChoices());
+				Element ele = Element.find.byId(Helper.decideWhichType(arche ,count, m.getDataElement().get(0).getValue("elementType"), m.getChoices()));
 				if (ele.type.equals("archetype")) {
 					ArrayList<Module> mods = comp.getUses();
 					for (Module mod : mods) {
 						arche.addUsedArchetypeId(mod.getIdentifier());
 					}
 				}
-				System.out.println("elebeforesaving "+ele);
 				count++;
 				arche.addElement(ele);
 			} catch (Exception e) {
