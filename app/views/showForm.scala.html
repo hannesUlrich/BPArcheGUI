@@ -1,11 +1,23 @@
 @(loggedInUser : Benutzer, names: List[Archetype], arche: Archetype)
 @main(loggedInUser, names){
     <body>
-        <ul>
-        @for(ele <- arche.getElements ) {
-            <li> @ele.toString  </li>
-        }
-        </ul>
+        <form>
+         @for(element <- arche.getElements) {
+         @if(!element.getType.equals("boolean")) {
+         @element.getArchetype.getName <input type="text" name="@element.getId">
+         @if(!element.getChoices.isEmpty) {
+         <select>
+         @for(choice <- element.getChoices) {
+         <option> @choice.getChoice </option>
+         }
+         </select>	
+         }
+         } else{
+         @element.getArchetype.getName <br>
+         <input type="radio" name="@element.getId" value="yes"> Yes <br>
+         <input type="radio" name="@element.getId" value="no"> No <br>
+         }
+         }
+        </form>
     </body>
-
 }
