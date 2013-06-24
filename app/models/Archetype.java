@@ -77,7 +77,7 @@ public class Archetype extends Model {
 
 	public void addElement(Element element) {
 		elements.add(element);
-		save();
+		update();
 	}
 	
 	public void setElements(List<Element> elements) {
@@ -104,7 +104,7 @@ public class Archetype extends Model {
 	
 	public void addUsedArchetypeId(String id) {
 		this.usedArchetypes.add(id);
-		save();
+		update();
 	}
 
 	public static Finder<String,Archetype> find = new Finder<String,Archetype>(
