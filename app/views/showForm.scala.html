@@ -3,21 +3,34 @@
     <body>
         <form>
          @for(element <- arche.getElements) {
-         @if(!element.getType.equals("boolean")) {
-         @element.getArchetype.getName <input type="text" name="@element.getId">
-         @if(!element.getChoices.isEmpty) {
-         <select>
-         @for(choice <- element.getChoices) {
-         <option> @choice.getChoice </option>
+         @if(element.getType.equals("boolean")) {
+         	@element.getArchetype.getName <br>
+         	<input type="radio" name="@element.getId" value="yes"> Yes <br>
+         	<input type="radio" name="@element.getId" value="no"> No <br>
          }
-         </select>	
+         @if(element.getType.equals("stringlist")){
+         	@if(!element.getChoices.isEmpty) {
+		         <select>
+		         @for(choice <- element.getChoices) {
+		         <option> @choice.getChoice </option>
+		         }
+		         </select>	
+		         }
          }
-         } else{
-         @element.getArchetype.getName <br>
-         <input type="radio" name="@element.getId" value="yes"> Yes <br>
-         <input type="radio" name="@element.getId" value="no"> No <br>
+         @if(element.getType.equals("int")) {
+         	@element.getArchetype.getName <input type="text" pattern="[0-9.]+" name="@element.getId">
+		         @if(!element.getChoices.isEmpty) {
+		         <select>
+		         @for(choice <- element.getChoices) {
+		         <option> @choice.getChoice </option>
+		         }
+		         </select>	
+		         }
          }
          }
         </form>
     </body>
 }
+
+
+

@@ -189,7 +189,7 @@ public class Helper {
 			Element e = new Element(arche, id, "int", choices);
 			return e.id;
 		} else if (type.equalsIgnoreCase("mtStringlist")) {
-			Element e = new Element(arche, id, "Stringlist", choices);
+			Element e = new Element(arche, id, "stringlist", choices);
 			return e.id;
 		} else {
 			return 0;
