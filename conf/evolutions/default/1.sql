@@ -26,20 +26,20 @@ create table choice (
   constraint pk_choice primary key (id))
 ;
 
-create table element (
-  id                        integer not null,
-  type                      varchar(255),
-  archetype_id              varchar(255),
-  constraint pk_element primary key (id))
-;
-
-create table result (
+create table daten (
   id                        integer not null,
   user_id                   varchar(255),
   archetype_type            varchar(255),
   value                     varchar(255),
   selected                  varchar(255),
-  constraint pk_result primary key (id))
+  constraint pk_daten primary key (id))
+;
+
+create table element (
+  id                        integer not null,
+  type                      varchar(255),
+  archetype_id              varchar(255),
+  constraint pk_element primary key (id))
 ;
 
 create sequence archetype_seq;
@@ -48,9 +48,9 @@ create sequence benutzer_seq;
 
 create sequence choice_seq;
 
-create sequence element_seq;
+create sequence daten_seq;
 
-create sequence result_seq;
+create sequence element_seq;
 
 alter table choice add constraint fk_choice_element_1 foreign key (element_id) references element (id) on delete restrict on update restrict;
 create index ix_choice_element_1 on choice (element_id);
@@ -69,9 +69,9 @@ drop table if exists benutzer;
 
 drop table if exists choice;
 
-drop table if exists element;
+drop table if exists daten;
 
-drop table if exists result;
+drop table if exists element;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
@@ -81,7 +81,7 @@ drop sequence if exists benutzer_seq;
 
 drop sequence if exists choice_seq;
 
-drop sequence if exists element_seq;
+drop sequence if exists daten_seq;
 
-drop sequence if exists result_seq;
+drop sequence if exists element_seq;
 

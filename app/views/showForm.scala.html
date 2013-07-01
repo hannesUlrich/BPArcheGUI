@@ -1,7 +1,7 @@
 @(loggedInUser : Benutzer, names: List[Archetype], arche: Archetype)
 @main(loggedInUser, names){
     <body>
-        <form>
+        <form action="@routes.Application.saveForm()" method="post">
          @for(element <- arche.getElements) {
          @if(element.getType.equals("boolean")) {
          	@element.getArchetype.getName <br>
@@ -26,8 +26,9 @@
 		         }
 		         </select>	
 		         }
+        	 }
          }
-         }
+         	<input type="submit" value="save" class="btn btn-medium btn-success " />
         </form>
     </body>
 }

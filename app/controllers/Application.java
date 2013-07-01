@@ -32,6 +32,10 @@ public class Application extends Controller {
     	return ok(showForm.render(benutzer,names,arche));
    }
     
+   public static Result saveForm() {
+	   return ok();
+   }
+    
     public static Result logout(){
         session().clear();
         flash("success","You've been logged out");
