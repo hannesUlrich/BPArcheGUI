@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import play.db.ebean.Model;
 
 @Entity
-public class Result extends Model {
+public class Daten extends Model {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -16,9 +16,9 @@ public class Result extends Model {
 	public String value;
 	public String selected;
 	
-	public Result(){}
+	public Daten(){}
 	
-	public Result(int id, String userID, String archetypeType, String value, String selected) {
+	public Daten(int id, String userID, String archetypeType, String value, String selected) {
 		this.id = id;
 		this.userID = userID;
 		this.archetypeType = archetypeType;
@@ -72,5 +72,5 @@ public class Result extends Model {
 		update();
 	}
 
-	public static Finder<Integer, Result> find = new Finder<Integer, Result>(Integer.class,Result.class);
+	public static Finder<Integer, Daten> find = new Finder<Integer, Daten>(Integer.class,Daten.class);
 }
