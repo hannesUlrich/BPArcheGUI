@@ -46,6 +46,6 @@ public class Application extends Controller {
         System.out.println( dynForm.data().toString());
         Archetype arche = Archetype.find.byId(archeID);
         new Daten(session("accountname"),arche,dynForm.get(String.valueOf(arche.getElements().get(0).getId())),dynForm.get("choice"));
-        return redirect(routes.LoginController.login());
+        return redirect(routes.Application.showArchetypeModal(archeID));
     }
 }
