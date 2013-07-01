@@ -16,8 +16,7 @@ POST    /login                      controllers.LoginController.authenticate()
 GET     /logout                     controllers.Application.logout()
 
 #
-GET     /description/:archetype      controllers.Application.showArchetypeModal(archetype :String)
+GET     /description/:archetype     controllers.Application.showArchetypeModal(archetype :String)
 
-GET     /showForm/:archetype controllers.Application.showForm(archetype :String)
-
-POST     /saveForm/ controllers.Application.saveForm()
+GET     /showForm/:archetype        controllers.Application.showForm(archetype :String)
+POST    /showForm/:archetype        controllers.Application.saveForm(archetype :String)
