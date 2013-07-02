@@ -28,8 +28,8 @@ create table choice (
 
 create table daten (
   id                        integer not null,
+  archetype_id              varchar(255),
   user_id                   varchar(255),
-  archetype_type            varchar(255),
   value                     varchar(255),
   selected                  varchar(255),
   constraint pk_daten primary key (id))
@@ -54,8 +54,10 @@ create sequence element_seq;
 
 alter table choice add constraint fk_choice_element_1 foreign key (element_id) references element (id) on delete restrict on update restrict;
 create index ix_choice_element_1 on choice (element_id);
-alter table element add constraint fk_element_archetype_2 foreign key (archetype_id) references archetype (id) on delete restrict on update restrict;
-create index ix_element_archetype_2 on element (archetype_id);
+alter table daten add constraint fk_daten_archetype_2 foreign key (archetype_id) references archetype (id) on delete restrict on update restrict;
+create index ix_daten_archetype_2 on daten (archetype_id);
+alter table element add constraint fk_element_archetype_3 foreign key (archetype_id) references archetype (id) on delete restrict on update restrict;
+create index ix_element_archetype_3 on element (archetype_id);
 
 
 

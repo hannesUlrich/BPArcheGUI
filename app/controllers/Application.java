@@ -4,6 +4,7 @@ import java.util.List;
 
 import models.Archetype;
 import models.Benutzer;
+import models.Daten;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -33,10 +34,10 @@ public class Application extends Controller {
     	List<Archetype> names = Archetype.find.all();
     	return ok(showForm.render(benutzer,names,arche));
    }
-    
+
     public static Result logout(){
         session().clear();
-        flash("success","You've been logged out");
+        flash("success","You've been logged out.");
         return redirect(routes.LoginController.login());
     }
 
@@ -45,6 +46,7 @@ public class Application extends Controller {
         System.out.println(dynForm.apply("choice"));
         System.out.println( dynForm.data().toString());
         Archetype arche = Archetype.find.byId(archeID);
-        return redirect(routes.LoginController.login());
+        new Daten(session("accountname"),arche,dynForm.get(String.valueOf(arche.getElements().get(0).getId())),dynForm.get("choice"));
+        return redirect(routes.Application.showArchetypeModal(archeID));
     }
 }
