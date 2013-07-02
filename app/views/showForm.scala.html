@@ -20,7 +20,7 @@
             }
          }
          @if(element.getType.equals("int")) {
-         	@element.getArchetype.getName <input type="text" pattern="[0-9.]+" name="@element.getId">
+         	@element.getArchetype.getName <input type="text" pattern="[0-9.]+" maxlength="3" name="@element.getId">
 		         @if(!element.getChoices.isEmpty) {
 		         <select name="choice">
 		         @for(choice <- element.getChoices) {

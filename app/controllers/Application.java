@@ -34,10 +34,6 @@ public class Application extends Controller {
     	return ok(showForm.render(benutzer,names,arche));
    }
     
-   public static Result saveForm() {
-	   return ok();
-   }
-    
     public static Result logout(){
         session().clear();
         flash("success","You've been logged out");
@@ -46,6 +42,7 @@ public class Application extends Controller {
 
     public static Result saveForm(String archeID){
         DynamicForm dynForm = Form.form().bindFromRequest();
+        System.out.println(dynForm.apply("choice"));
         System.out.println( dynForm.data().toString());
         Archetype arche = Archetype.find.byId(archeID);
         return redirect(routes.LoginController.login());
