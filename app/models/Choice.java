@@ -24,7 +24,6 @@ public class Choice extends Model{
     
     public Choice(int id, String choice, Element element) {
     	this.id = id;
-    	System.out.println("Im Konsrtuktor"+ choice);
         this.choiceString = choice;
         this.element = element;
         save();

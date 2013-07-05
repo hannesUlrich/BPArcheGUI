@@ -46,7 +46,6 @@ public class Application extends Controller {
 
     public static Result saveForm(String archeID) {
         DynamicForm dynForm = Form.form().bindFromRequest();
-        System.out.println(dynForm.data().toString());
         Archetype arche = Archetype.find.byId(archeID);
         Daten data = getDataFromDB(arche);
         for (String s : dynForm.data().keySet()) {
@@ -105,9 +104,7 @@ public class Application extends Controller {
      */
     public static int calculateBMI() {
         double m = Double.valueOf(Daten.find.where().eq("archetype.name", "PatientBodyWeight").eq("userID", session("accountname")).findUnique().getValue());
-        System.out.println("m = " + m);
         double l = Double.valueOf(Daten.find.where().eq("archetype.name","PatientBodyHeight").eq("userID",session("accountname")).findUnique().getValue()) / 100;
-        System.out.println("l = " + l);
         return (int) (m/(l*l));
     }
 
