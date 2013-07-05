@@ -33,7 +33,7 @@ public class Global extends GlobalSettings {
     }
     
     public void checkingArchetypes() {
-    	ArrayList<File> files = Helper.checkFiles(new File(Helper.getCurrentDir()+"resource/"));
+    	ArrayList<File> files = Helper.getFiles(new File(Helper.getCurrentDir()+"resource/"));
 		for (File aFile : files) {
 			Components comp = new Components(Helper.getCurrentDir()+"resource/"+aFile.getName());
 			try {
@@ -44,15 +44,13 @@ public class Global extends GlobalSettings {
 				String usage = m.getUse();
 				String misusage = m.getMisuse();
 				Archetype arche = new Archetype( id, name, purpose, usage, misusage);
-				System.out.println("Im Global " + m.getChoices());
-				Element ele = Element.find.byId(Helper.decideWhichType(arche ,count, m.getDataElement().get(0).getValue("elementType"), m.getChoices()));
+				Element ele = Element.find.byId(Helper.decideWhichType(arche ,count++, m.getDataElement().get(0).getValue("elementType"), m.getChoices()));
 				if (ele.type.equals("archetype")) {
 					ArrayList<Module> mods = comp.getUses();
-					for (Module mod : mods) {
-						arche.addUsedArchetypeId(mod.getIdentifier());
+                    for (Module mod : mods) {
+                        arche.addUsedArchetypeId(mod.getIdentifier());
 					}
 				}
-				count++;
 				arche.addElement(ele);
 			} catch (Exception e) {
 				System.err.println("failed to generate Archetype object: " + aFile.getName());

@@ -2,19 +2,19 @@
 <!DOCTYPE html>
 
 <html>
-<body>
-	<div class="well">
-		<ul class="nav nav-list">
-			<li class="nav-header">Archetypes</li>
-			@for(a <- names) {
-		  	<li><a href="@routes.Application.showArchetypeModal(a.getId)" class="pull-left" data-target="#myModal" data-toggle="modal"><i class="icon-info-sign"></i></a>
-                <a href="@routes.Application.showForm(a.getId)">@a.getName</a></li>
+    <body>
+        <div class="well">
+            <ul class="nav nav-list">
+                <li class="nav-header">Archetypes</li>
+                @for(a <- names) {
+                    <li><a href="@routes.Application.showArchetypeModal(a.getId)" class="pull-left" data-target="#myModal" data-toggle="modal"><i class="icon-info-sign"></i></a>
+                        <a href="@routes.Application.showForm(a.getId)">@a.getName</a></li>
 
 
-			}
-		</ul>
-    </div>
-</body>
+                }
+            </ul>
+        </div>
+    </body>
 </html>
 
 

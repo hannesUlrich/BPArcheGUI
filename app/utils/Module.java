@@ -7,17 +7,6 @@ import javax.xml.stream.events.XMLEvent;
 
 public class Module {
 
-	/**
-	 * Checks if input string a is an Integer
-	 * 
-	 * @param a
-	 *            input string
-	 * @return true if the input string is an integer
-	 */
-	public static boolean isInteger(String a) {
-		return a.matches("^-?[0-9]+$");
-	}
-
 	private XMLEvent archetypeRoot;
 	private String use;
 	private String misuse;
@@ -100,7 +89,7 @@ public class Module {
 	 * adds all uses as strings. To reference to module, store all components
 	 * and try to find the module
 	 * 
-	 * @param choices
+	 * @param uses
 	 */
 	public void addUses(ArrayList<String> uses) {
 		for (String s : uses) {
@@ -231,23 +220,10 @@ public class Module {
 	 */
 	public void setDefaultIndex(String index) {
 		int tmp = 0;
-		if (isInteger(index)) {
+		if (Helper.isInteger(index)) {
 			tmp = Integer.valueOf(index);
 		}
 		defaultIndex = tmp;
-	}
-
-	/**
-	 * set description with all three values for use, misuse and purpse
-	 * 
-	 * @param use
-	 * @param misuse
-	 * @param purpose
-	 */
-	public void setDescription(String use, String misuse, String purpose) {
-		setUse(use);
-		setMisuse(misuse);
-		setPurpose(purpose);
 	}
 
 	/**
