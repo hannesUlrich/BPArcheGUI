@@ -3,7 +3,6 @@ package utils;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.namespace.QName;
@@ -24,14 +23,6 @@ public class XMLReader {
 	 */
 	public static String extractFileExt(String aPath) {
 		return aPath.substring(aPath.lastIndexOf('.'), aPath.length());
-	}
-
-	public static <E> ArrayList<E> getList(Iterator<E> i) {
-		ArrayList<E> list = new ArrayList<>();
-		while (i.hasNext()) {
-			list.add(i.next());
-		}
-		return list;
 	}
 
 	private boolean error = false;
@@ -59,9 +50,10 @@ public class XMLReader {
 	 *         returns null if there is no XML available
 	 */
 	public XMLEventReader createXMLReader() {
-		if (error) {
+		if (error || !Helper.isFileExistent(filePath)) {
 			return null;
 		}
+
 		try {
 			// create input factory
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
@@ -69,8 +61,7 @@ public class XMLReader {
 			// read a xml file
 			InputStream input = new FileInputStream(filePath);
 			return inputFactory.createXMLEventReader(input);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -95,11 +86,12 @@ public class XMLReader {
 	 * @return specific Attribute
 	 * @throws Exception
 	 */
-	public Attribute getAttribute(String elementName, String attrName) throws Exception {
+	public Attribute getAttribute(String elementName, String attrName)
+			throws Exception {
 		XMLEventReader eventReader = createXMLReader();
 		// create an empty list
 		Attribute attr = null;
-		if (error) {
+		if (eventReader == null) {
 			return attr;
 		}
 		// iterate through all events
@@ -111,13 +103,20 @@ public class XMLReader {
 				// get all attributes
 				if (start.getName().getLocalPart().equals(elementName)) {
 					attr = start.getAttributeByName(new QName(attrName));
+					break;
 				}
 			}
 		}
 		return attr;
 	}
 
-	// TODO
+	/**
+	 * returns the attribute with name attrName that belongs to the xml event e
+	 * 
+	 * @param e
+	 * @param attrName
+	 * @return returns null if e is no start element
+	 */
 	public Attribute getAttribute(XMLEvent e, String attrName) {
 		Attribute a = null;
 		if (e.isStartElement()) {
@@ -149,10 +148,12 @@ public class XMLReader {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public Map getAttributes(String elementName) throws Exception {
+	public AttributeMap
+
+    getAttributes(String elementName) throws Exception {
 		XMLEventReader eventReader = createXMLReader();
 		// create an empty list
-		Map attr = new Map();
+		AttributeMap attr = new AttributeMap();
 		if (error) {
 			return attr;
 		}
@@ -164,7 +165,8 @@ public class XMLReader {
 				StartElement start = event.asStartElement();
 				// get all attributes
 				if (start.getName().getLocalPart().equals(elementName)) {
-					attr.addNewList(event, getList(start.getAttributes()));
+					attr.addNewList(event,
+							Helper.getList(start.getAttributes()));
 				}
 			}
 		}
@@ -192,10 +194,15 @@ public class XMLReader {
 		while (eventReader.hasNext()) {
 			event = eventReader.nextEvent();
 			// check if it is the right element
-			if (event.isStartElement() && event.asStartElement().getName().getLocalPart().equals(elementName)) {
+			if (event.isStartElement()
+					&& event.asStartElement().getName().getLocalPart()
+							.equals(elementName)) {
 				// return next event (CharacterEvent)
 				return eventReader.nextEvent();
 			}
+		}
+		if (event.isEndDocument()) {
+			return null;
 		}
 		return event;
 	}
@@ -210,14 +217,16 @@ public class XMLReader {
 	 * @return List of all children
 	 * @throws Exception
 	 */
-	private List<XMLEvent> getChild(XMLEventReader r, String elementName) throws Exception {
+	private List<XMLEvent> getChild(XMLEventReader r, String elementName)
+			throws Exception {
 		ArrayList<XMLEvent> attr = new ArrayList<>();
 		int counter = 0;
 		while (r.hasNext()) {
 			// get next event
 			XMLEvent event = r.nextEvent();
 			if (event.isStartElement()) {
-				if (event.asStartElement().getName().getLocalPart().equals(elementName)) {
+				if (event.asStartElement().getName().getLocalPart()
+						.equals(elementName)) {
 					// if it has the same name like the parent, increase a
 					// counter to add children
 					counter++;
@@ -225,7 +234,8 @@ public class XMLReader {
 				attr.add(event);
 			}
 			if (event.isEndElement()) {
-				if (event.asEndElement().getName().getLocalPart().equals(elementName)) {
+				if (event.asEndElement().getName().getLocalPart()
+						.equals(elementName)) {
 					if (counter >= 1) {
 						// decrease the counter
 						counter--;
@@ -258,13 +268,15 @@ public class XMLReader {
 			XMLEvent event = eventReader.nextEvent();
 			if (event.isStartElement()) {
 				// if the parent's name if the wanted one
-				if (event.asStartElement().getName().getLocalPart().equals(elementName)) {
+				if (event.asStartElement().getName().getLocalPart()
+						.equals(elementName)) {
 					// add all children returns by subfunction
 					attr.addAll(getChild(eventReader, elementName));
 				}
 			}
 			if (event.isEndElement()) {
-				if (event.asEndElement().getName().getLocalPart().equals(elementName)) {
+				if (event.asEndElement().getName().getLocalPart()
+						.equals(elementName)) {
 					// break the iteration if the end is reached
 					break;
 				}
@@ -294,17 +306,20 @@ public class XMLReader {
 			XMLEvent event = eventReader.nextEvent();
 			if (event.isStartElement()) {
 				// if the parent's name if the wanted one
-				if (isEqual(event, e)) {
-					elementName = event.asStartElement().getName().getLocalPart();
+				if (Helper.isEqual(event, e)) {
+					elementName = event.asStartElement().getName()
+							.getLocalPart();
 					// add all children returns by subfunction
-					attr.addAll(getChild(eventReader, event.asStartElement().getName().getLocalPart()));
+					attr.addAll(getChild(eventReader, event.asStartElement()
+							.getName().getLocalPart()));
 				}
 			}
 			if (event.isEndElement()) {
 				if (elementName == null) {
 					continue;
 				}
-				if (event.asEndElement().getName().getLocalPart().equals(elementName)) {
+				if (event.asEndElement().getName().getLocalPart()
+						.equals(elementName)) {
 					// break the iteration if the end is reached, comment this
 					// if all children of elementName are wanted
 					break;
@@ -339,14 +354,17 @@ public class XMLReader {
 			// get the next event
 			event = eventReader.nextEvent();
 			// check if next event is candidate for the wanted event
-			if (event.isStartElement() && event.asStartElement().getName().getLocalPart().equals(elementName)) {
+			if (event.isStartElement()
+					&& event.asStartElement().getName().getLocalPart()
+							.equals(elementName)) {
 				if (hasAttributes) {
-					if (getList(event.asStartElement().getAttributes()).size() > 0) {
+					if (Helper.getList(event.asStartElement().getAttributes())
+							.size() > 0) {
 						events.add(event);
 					}
-				}
-				else {
-					if (getList(event.asStartElement().getAttributes()).size() == 0) {
+				} else {
+					if (Helper.getList(event.asStartElement().getAttributes())
+							.size() == 0) {
 						events.add(event);
 					}
 				}
@@ -374,9 +392,14 @@ public class XMLReader {
 			// get the next event
 			event = eventReader.nextEvent();
 			// check if next event is candidate for the wanted event
-			if (event.isStartElement() && event.asStartElement().getName().getLocalPart().equals(elementName)) {
+			if (event.isStartElement()
+					&& event.asStartElement().getName().getLocalPart()
+							.equals(elementName)) {
 				return event;
 			}
+		}
+		if (event.isEndDocument()) {
+			return null;
 		}
 		return event;
 	}
@@ -393,7 +416,8 @@ public class XMLReader {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public XMLEvent getElement(String elementName, boolean hasAttributes) throws Exception {
+	public XMLEvent getElement(String elementName, boolean hasAttributes)
+			throws Exception {
 		XMLEventReader eventReader = createXMLReader();
 		XMLEvent event = null;
 		if (error) {
@@ -404,18 +428,24 @@ public class XMLReader {
 			// get the next event
 			event = eventReader.nextEvent();
 			// check if next event is candidate for the wanted event
-			if (event.isStartElement() && event.asStartElement().getName().getLocalPart().equals(elementName)) {
+			if (event.isStartElement()
+					&& event.asStartElement().getName().getLocalPart()
+							.equals(elementName)) {
 				if (hasAttributes) {
-					if (getList(event.asStartElement().getAttributes()).size() > 0) {
+					if (Helper.getList(event.asStartElement().getAttributes())
+							.size() > 0) {
 						return event;
 					}
-				}
-				else {
-					if (getList(event.asStartElement().getAttributes()).size() == 0) {
+				} else {
+					if (Helper.getList(event.asStartElement().getAttributes())
+							.size() == 0) {
 						return event;
 					}
 				}
 			}
+		}
+		if (event.isEndDocument()) {
+			return null;
 		}
 		return event;
 	}
@@ -429,7 +459,8 @@ public class XMLReader {
 	 *         element name to the candidate list.
 	 * @throws Exception
 	 */
-	public ArrayList<XMLEvent> getElementsByName(String elementName) throws Exception {
+	public ArrayList<XMLEvent> getElementsByName(String elementName)
+			throws Exception {
 		XMLEventReader eventReader = createXMLReader();
 		ArrayList<XMLEvent> events = new ArrayList<>();
 		if (error) {
@@ -437,7 +468,9 @@ public class XMLReader {
 		}
 		while (eventReader.hasNext()) {
 			XMLEvent event = eventReader.nextEvent();
-			if (event.isStartElement() && event.asStartElement().getName().getLocalPart().equals(elementName)) {
+			if (event.isStartElement()
+					&& event.asStartElement().getName().getLocalPart()
+							.equals(elementName)) {
 				// add every event that matches the element name
 				events.add(event);
 			}
@@ -463,7 +496,7 @@ public class XMLReader {
 			String attributeValue) throws Exception {
 		XMLEventReader eventReader = createXMLReader();
 		XMLEvent event = null;
-		if (error) {
+		if (eventReader == null) {
 			return null;
 		}
 		// iterate through all events
@@ -471,13 +504,19 @@ public class XMLReader {
 			// get the next event
 			event = eventReader.nextEvent();
 			// check if next event is candidate for the wanted event
-			if (event.isStartElement() && event.asStartElement().getName().getLocalPart().equals(elementName)) {
+			if (event.isStartElement()
+					&& event.asStartElement().getName().getLocalPart()
+							.equals(elementName)) {
 				// prevents NullPointerExceptions
-				Attribute tmp = event.asStartElement().getAttributeByName(new QName(attributeName));
-				if (tmp != null && tmp.getValue().equals(attributeValue)) {
+				Attribute tmp = event.asStartElement().getAttributeByName(
+						new QName(attributeName));
+				if ((tmp != null) && tmp.getValue().equals(attributeValue)) {
 					return event;
 				}
 			}
+		}
+		if (event.isEndDocument()) {
+			return null;
 		}
 		return event;
 	}
@@ -505,7 +544,8 @@ public class XMLReader {
 				// on first level?
 				if (counter == 0) {
 					// get the specific start element name
-					startElementName = event.asStartElement().getName().getLocalPart();
+					startElementName = event.asStartElement().getName()
+							.getLocalPart();
 					// increase counter so that children won't be added
 					counter++;
 					// save the startEvent
@@ -514,7 +554,8 @@ public class XMLReader {
 			}
 			if (event.isEndElement()) {
 				// end element's name == start element's name
-				if (event.asEndElement().getName().getLocalPart().equals(startElementName)) {
+				if (event.asEndElement().getName().getLocalPart()
+						.equals(startElementName)) {
 					// add stored start event to list
 					attr.add(storedStart);
 					// decrease counter for next child
@@ -522,7 +563,8 @@ public class XMLReader {
 					continue;
 				}
 				// jump out of iteration
-				if (event.asEndElement().getName().getLocalPart().equals(elementName)) {
+				if (event.asEndElement().getName().getLocalPart()
+						.equals(elementName)) {
 					break;
 				}
 			}
@@ -538,42 +580,31 @@ public class XMLReader {
 	 * @return list of all children
 	 * @throws Exception
 	 */
-	public ArrayList<XMLEvent> getFirstLevelChildren(String elementName) throws Exception {
+	public ArrayList<XMLEvent> getFirstLevelChildren(String elementName)
+			throws Exception {
 		XMLEventReader eventReader = createXMLReader();
 		// create an empty list
 		ArrayList<XMLEvent> attr = new ArrayList<>();
-		if (error) {
+		if (error || (eventReader == null)) {
 			return attr;
 		}
 		while (eventReader.hasNext()) {
 			XMLEvent event = eventReader.nextEvent();
 			if (event.isStartElement()) {
-				if (event.asStartElement().getName().getLocalPart().equals(elementName)) {
+				if (event.asStartElement().getName().getLocalPart()
+						.equals(elementName)) {
 					// add all children returned by subfunction
 					attr.addAll(getFirstLevelChild(eventReader, elementName));
 				}
 			}
 			if (event.isEndElement()) {
-				if (event.asEndElement().getName().getLocalPart().equals(elementName)) {
+				if (event.asEndElement().getName().getLocalPart()
+						.equals(elementName)) {
 					break;
 				}
 			}
 		}
 		return attr;
-	}
-
-	// TODO
-	public XMLEvent getRoot(XMLEvent e) throws Exception {
-		XMLEventReader eventReader = createXMLReader();
-
-		while (eventReader.hasNext()) {
-			XMLEvent event = eventReader.nextEvent();
-			if (event.isStartElement()) {
-
-			}
-		}
-		XMLEvent ev = null;
-		return ev;
 	}
 
 	/**
@@ -585,14 +616,16 @@ public class XMLReader {
 	 */
 	public String getValue(String event) throws Exception {
 		XMLEventReader eventReader = createXMLReader();
-		if (error) {
+		if (error || (eventReader == null)) {
 			return null;
 		}
 		while (eventReader.hasNext()) {
 			XMLEvent e = eventReader.nextEvent();
 			// e.equals() does not work, isEqual checks position of both events
 			// within XML file, returns true if they have the same locations
-			if (e.isStartElement() && e.asStartElement().getName().getLocalPart().equals(event)) {
+			if (e.isStartElement()
+					&& e.asStartElement().getName().getLocalPart()
+							.equals(event)) {
 				XMLEvent ev = eventReader.nextEvent();
 				if (ev.isCharacters()) {
 					return ev.asCharacters().getData();
@@ -606,19 +639,19 @@ public class XMLReader {
 	 * returns the value of an XML element
 	 * 
 	 * @param event
-	 * @return
+	 * @return returns null if there is no such event
 	 * @throws Exception
 	 */
 	public String getValue(XMLEvent event) throws Exception {
 		XMLEventReader eventReader = createXMLReader();
-		if (error) {
+		if (error || (eventReader == null)) {
 			return null;
 		}
 		while (eventReader.hasNext()) {
 			XMLEvent e = eventReader.nextEvent();
 			// e.equals() does not work, isEqual checks position of both events
 			// within XML file, returns true if they have the same locations
-			if (isEqual(e, event)) {
+			if (Helper.isEqual(e, event)) {
 				// get the character event
 				XMLEvent ev = eventReader.nextEvent();
 				if (ev.isCharacters()) {
@@ -630,30 +663,20 @@ public class XMLReader {
 	}
 
 	/**
-	 * additional function to check whether two events are equal
-	 * 
-	 * @param ev1
-	 *            event 1
-	 * @param ev2
-	 *            event 2
-	 * @return returns true if both events have the same locations within the
-	 *         xml file
-	 * @throws Exception
-	 */
-	public boolean isEqual(XMLEvent ev1, XMLEvent ev2) throws Exception {
-		boolean tmp = false;
-		tmp = ev1.getLocation().getColumnNumber() == ev2.getLocation().getColumnNumber() && ev1.getLocation().getLineNumber() == ev2.getLocation().getLineNumber() && ev1.getLocation().getCharacterOffset() == ev2.getLocation().getCharacterOffset();
-		return tmp;
-	}
-
-	/**
 	 * @return returns true if the filepath does not belong to a xml file
 	 */
 	public boolean isErroneous() {
 		return error;
 	}
 
-	// TODO
+	/**
+	 * checks whether a XMLEvent belongs to a root
+	 * 
+	 * @param root
+	 * @param child
+	 * @return returns true if the event child belongs to the event root
+	 * @throws Exception
+	 */
 	public boolean isRoot(XMLEvent root, XMLEvent child) throws Exception {
 		XMLEventReader eventReader = createXMLReader();
 		// create an empty list
@@ -666,16 +689,18 @@ public class XMLReader {
 			// get next event
 			XMLEvent event = eventReader.nextEvent();
 			if (event.isStartElement()) {
-				if (isEqual(event, root)) {
-					elementName = event.asStartElement().getName().getLocalPart();
+				if (Helper.isEqual(event, root)) {
+					elementName = event.asStartElement().getName()
+							.getLocalPart();
 					continue;
 				}
 			}
-			if (isEqual(event, child) && elementName != null) {
+			if (Helper.isEqual(event, child) && (elementName != null)) {
 				return true;
 			}
 			if (event.isEndElement()) {
-				if (event.asEndElement().getName().getLocalPart().equals(elementName)) {
+				if (event.asEndElement().getName().getLocalPart()
+						.equals(elementName)) {
 					// break the iteration if the end is reached, comment this
 					// if all children of elementName are wanted
 					break;

@@ -1,36 +1,9 @@
-@(loggedInUser : Benutzer, names: List[Archetype], arche: Archetype)
-@main(loggedInUser, names){
+@(loggedInUser: Benutzer, names: List[Archetype], arche: Archetype)
+@main(loggedInUser, names) {
     <body>
         <form method="post" action="@routes.Application.saveForm(arche.getId)">
-         @for(element <- arche.getElements) {
-         @if(element.getType.equals("boolean")) {
-         	@element.getArchetype.getName <br>
-         	<input type="radio" name="@element.getId" value="yes"> Yes <br>
-         	<input type="radio" name="@element.getId" value="no"> No <br>
-            <input type="submit" class="btn btn-primary" value="Speichern">
-         }
-         @if(element.getType.equals("stringlist")){
-         	@if(!element.getChoices.isEmpty) {
-		         <select name="choice">
-		         @for(choice <- element.getChoices) {
-		         <option value="@element.getChoices.indexOf(choice)"> @choice.getChoice </option>
-		         }
-		         </select>
-            <input type="submit" class="btn btn-primary" value="Speichern">
-            }
-         }
-         @if(element.getType.equals("int")) {
-         	@element.getArchetype.getName <input type="text" pattern="[0-9.]+" maxlength="3" name="@element.getId">
-		         @if(!element.getChoices.isEmpty) {
-		         <select name="choice">
-		         @for(choice <- element.getChoices) {
-		         <option value="@choice.getChoice"> @choice.getChoice </option>
-		         }
-		         </select>	
-		         }
-             <input type="submit" class="btn btn-primary" value="Speichern">
-         }
+        @showArchetype(arche)
         </form>
     </body>
 }
-}
+

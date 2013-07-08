@@ -1,5 +1,4 @@
 package utils;
-
 public class Definition extends ChildElement {
 
 	private String localCode;
@@ -30,7 +29,6 @@ public class Definition extends ChildElement {
 		this.localCode = localCode;
 	}
 
-	@Override
 	public String toString() {
 		return "Code: " + localCode;
 	}

@@ -11,32 +11,23 @@ public class Components {
 	private XMLReader reader;
 	private ArrayList<Module> archetypes;
 	private Module main;
+	private boolean hasFile = true;
 
-	/**
-	 * @return returns the current directory of execution
-	 */
-	public static String getCurrentDir() {
-		File tmp = new File("");
-		return includeTrailingBackslash(tmp.getAbsolutePath());
-	}
+	public static void main(String[] args) {
+		ArrayList<Components> list = new ArrayList<>();
+		Components c = new Components(
+				"E:\\Programme\\Eclipse\\workspace\\XML\\height.xml");
+		System.out.println(c.getMainModule());
 
-	/**
-	 * @param aPath
-	 *            path to specific file
-	 * @return the filepath with file separator at the end
-	 */
-	public static String includeTrailingBackslash(String aPath) {
-		if (aPath.charAt(aPath.length() - 1) != System.getProperty(
-				"file.separator").charAt(0)) {
-			return aPath + System.getProperty("file.separator");
+		try {
+			boolean x;
+			if (x = true) {
+				System.out.println("sdfsdf");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
 		}
-		return aPath;
-	}
-
-	public static String extractFileName(String aPath) {
-		File aFile = new File(aPath);
-		String tmp = aFile.getName();
-		return tmp.substring(0, tmp.lastIndexOf("."));
 	}
 
 	/**
@@ -95,8 +86,11 @@ public class Components {
 	 * @param path
 	 *            file path to archetype xml
 	 */
-	@SuppressWarnings({ "unchecked"})
 	public Components(String path) {
+		if (!Helper.isFileExistent(path)) {
+			hasFile = false;
+			return;
+		}
 		archetypes = new ArrayList<>();
 		reader = new XMLReader(path);
 		try {
@@ -114,8 +108,8 @@ public class Components {
 			ArrayList<XMLEvent> useList = reader.getElementsByName("use");
 			ArrayList<XMLEvent> misuseList = reader.getElementsByName("misuse");
 			ArrayList<XMLEvent> choiceList = reader.getChildren("choices");
-			Map groups = reader.getAttributes("DataGroup");
-			Map elements = reader.getAttributes("DataElement");
+			AttributeMap groups = reader.getAttributes("DataGroup");
+			AttributeMap elements = reader.getAttributes("DataElement");
 			ArrayList<XMLEvent> definitions = reader
 					.getFirstLevelChildren("termDefinition");
 			ArrayList<XMLEvent> uses = reader.getFirstLevelChildren("uses");
@@ -185,9 +179,8 @@ public class Components {
 				ArrayList<String> choices = new ArrayList<>();
 				for (XMLEvent choiceEvent : choiceList) {
 					if (reader.isRoot(archetype, choiceEvent)) {
-						ArrayList<Attribute> list = XMLReader
-								.getList(choiceEvent.asStartElement()
-										.getAttributes());
+						ArrayList<Attribute> list = Helper.getList(choiceEvent
+								.asStartElement().getAttributes());
 						for (Attribute a : list) {
 							if (!a.getName().getLocalPart().equals("range")) {
 								choices.add(a.getValue());
@@ -253,7 +246,8 @@ public class Components {
 
 				archetypes.add(module);
 				// save the main module of this module collection
-				if (module.getIdentifier().equals(extractFileName(path))) {
+				if (module.getIdentifier().equals(
+						Helper.extractFileNameWithoutEnding(path))) {
 					// main module is identified by the equality of identifier
 					// and files name
 					main = module;
@@ -345,5 +339,20 @@ public class Components {
 	 */
 	public int size() {
 		return archetypes.size();
+	}
+
+	/**
+	 * @return the noFile
+	 */
+	public boolean hasFile() {
+		return hasFile;
+	}
+
+	/**
+	 * @param noFile
+	 *            the noFile to set
+	 */
+	public void setHasFile(boolean noFile) {
+		this.hasFile = noFile;
 	}
 }
