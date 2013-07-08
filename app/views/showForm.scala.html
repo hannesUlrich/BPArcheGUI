@@ -4,6 +4,11 @@
         <form method="post" action="@routes.Application.saveForm(arche.getId)">
         @showArchetype(arche)
         </form>
+        @if(flash.contains("saved")) {
+            <p class="alert-success">
+            @flash.get("saved")
+            </p>
+        }
     </body>
 }
 

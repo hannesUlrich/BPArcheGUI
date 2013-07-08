@@ -1,0 +1,27 @@
+@(form: Form[LoginController.Register])
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+    <head>
+        <title>Bachelor Projekt Arche GUI</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+    </head>
+    <body>
+
+        <div class="container">
+        @helper.form(routes.LoginController.register, 'class -> "form-signin") {
+            <h2 class="form-signin-heading">Please register</h2>
+            <input type="text" name="accountname" placeholder="Accountname" value="@form("accountname").value" class="input-block-level">
+            <input type="password" name="password" placeholder="Password" class="input-block-level">
+            <input type="text" name="fullName" placeholder="Full Name" value="@form("fullName").value" class="input-block-level">
+            <button type="submit" class="btn btn-large btn-primary">Register</button>
+            @if(form.hasGlobalErrors) {
+                <p class="alert-error">
+                @form.globalError.message
+                </p>
+            }
+        }
+        </div>
+
+    </body>
+</html>
