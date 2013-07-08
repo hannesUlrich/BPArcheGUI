@@ -31,6 +31,23 @@ public class LoginController extends Controller{
         }
     }
 
+    public static Result showRegister(){
+        return ok(register.render(Form.form(Register.class)));
+    }
+
+    public static Result register(){
+        Form<Register> loginForm = Form.form(Register.class).bindFromRequest();
+        if (loginForm.hasErrors()) {
+            return badRequest(register.render(loginForm));
+        } else {
+            new Benutzer(loginForm.get().accountname,loginForm.get().password,loginForm.get().fullName).save();
+            return redirect(routes.Application.index());
+        }
+    }
+
+
+
+
 
     public static class Login{
         public String accountname;
@@ -39,6 +56,30 @@ public class LoginController extends Controller{
         public String validate() {
             if (Benutzer.authenticate(accountname, password) == null) {
                 return "Invalid user or password";
+            }
+            return null;
+        }
+
+    }
+    public static class Register{
+        public String accountname;
+        public String password;
+        public String fullName;
+
+        public String validate() {
+            if(Benutzer.find.byId(accountname)!=null){
+                return "User already in Database";
+            }
+            if(accountname == null || accountname.equals("")){
+                return "Accountname has to be defined";
+            }
+
+            if(password == null || password.equals("")){
+                return "Password has to be defined";
+            }
+
+            if(fullName == null || fullName.equals("")){
+                return "Fullname has to be defined";
             }
             return null;
         }

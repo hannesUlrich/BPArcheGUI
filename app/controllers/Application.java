@@ -44,6 +44,7 @@ public class Application extends Controller {
         return redirect(routes.LoginController.login());
     }
 
+
     public static Result saveForm(String archeID) {
         DynamicForm dynForm = Form.form().bindFromRequest();
         Archetype arche = Archetype.find.byId(archeID);
@@ -76,7 +77,7 @@ public class Application extends Controller {
 //        new Daten(session("accountname"), arche, dynForm.get(String.valueOf(arche.getElements().get(0).getId())), dynForm.get("choice"));
 //
         flash("saved", "Data has been saved succesfully.");
-        return redirect(routes.Application.index());
+        return redirect(routes.Application.showForm(archeID));
     }
 
 
@@ -103,8 +104,20 @@ public class Application extends Controller {
      * @return
      */
     public static int calculateBMI() {
-        double m = Double.valueOf(Daten.find.where().eq("archetype.name", "PatientBodyWeight").eq("userID", session("accountname")).findUnique().getValue());
-        double l = Double.valueOf(Daten.find.where().eq("archetype.name","PatientBodyHeight").eq("userID",session("accountname")).findUnique().getValue()) / 100;
+        Daten d = Daten.find.where().eq("archetype.name", "PatientBodyWeight").eq("userID", session("accountname")).findUnique();
+        double m = Double.valueOf(d.getValue());
+        if (d.getSelected().equals("lb")){
+            m *= 0.45359237;
+        }
+
+        d = Daten.find.where().eq("archetype.name","PatientBodyHeight").eq("userID",session("accountname")).findUnique();
+        double l = Double.valueOf(d.getValue());
+        if (d.getSelected().equals("foot")){
+            l *= 0.3048;
+        }else{
+            l /= 100;
+        }
+
         return (int) (m/(l*l));
     }
 
