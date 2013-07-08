@@ -1,11 +1,11 @@
 @(arche: Archetype)
 <body>
     <h4>@arche.getId : @arche.getName</h4>
-    <h5>Purpose:</h5>
+    <h5> @play.i18n.Messages.get("modal.purpose")</h5>
     <p>@arche.getPurpose</p>
-    <h5>Usage:</h5>
+    <h5>@play.i18n.Messages.get("modal.usage"):</h5>
     <p>@arche.getUsage</p>
-    <h5>Misusage:</h5>
+    <h5>@play.i18n.Messages.get("modal.misusage"):</h5>
     <p>@arche.getMisusage</p>
 </body>
 

@@ -1,11 +1,15 @@
 import java.io.File;
 import java.util.ArrayList;
 
+import play.*;
+
 import models.Archetype;
 import models.Benutzer;
 import models.Element;
 import play.Application;
 import play.GlobalSettings;
+import play.mvc.Action;
+import play.mvc.Http.Request;
 import utils.Components;
 import utils.Helper;
 import utils.Module;

@@ -5,8 +5,8 @@
             @if(element.getType.equals("boolean")) {
                 @element.getArchetype.getName <br xmlns="http://www.w3.org/1999/html">
                 @if(data == null || data.getValue.equals("no")) {
-                    <input type="radio" name="@element.getId" value="yes"> Yes <br>
-                    <input type="radio" name="@element.getId" checked="checked" value="no"> No <br> <br>
+                    <input type="radio" name="@element.getId" value="yes"> @play.i18n.Messages.get("yes") <br>
+                    <input type="radio" name="@element.getId" checked="checked" value="no"> @play.i18n.Messages.get("no") <br> <br>
                 } else {
                     <input type="radio" name="@element.getId" checked="checked" value="yes"> Yes <br>
                     <input type="radio" name="@element.getId" value="no"> No <br> <br>
@@ -49,9 +49,9 @@
             }
             @if(arche.getUsedArchetypes.size() <= 0) {
                 @if(data != null) {
-                    <input type="submit" class="btn" value="Aktualisieren">
+                    <input type="submit" class="btn" value="@play.i18n.Messages.get("update")">
                 } else {
-                    <input type="submit" class="btn" value="Speichern">
+                    <input type="submit" class="btn" value="@play.i18n.Messages.get("save")">
                 }
             }
         }
@@ -60,7 +60,7 @@
         <div class="row">
             <div class="span4">
                 <table class="table table-hover">
-                    <tr><th>Archetype</th><th>In Datenbank gespeichert</th></tr>
+                    <tr><th>Archetype</th><th>@play.i18n.Messages.get("save.db")</th></tr>
                     @for(archeId: String <- arche.getUsedArchetypes) {
                         <tr><th>@Archetype.find.byId(archeId).name</th>
                             @if(Application.dataInDB(Archetype.find.byId(archeId))) {
@@ -76,7 +76,7 @@
         <div class="row">
             @if(Application.allDataInDB(arche)){
                 BMI: @Application.calculateBMI() <br>
-                Eingereicht von @Application.getPhysician
+                @play.i18n.Messages.get("submit") @Application.getPhysician
             }
         </div>
 

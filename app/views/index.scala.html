@@ -1,6 +1,6 @@
 @(loggedInUser: Benutzer, names: List[Archetype])
     @main(loggedInUser, names) {
-        <h2 class="hero-unit">Welcome</h2>
+        <h2 class="hero-unit"> @play.i18n.Messages.get("welcome") </h2>
         @if(flash.contains("saved")) {
             <p class="alert-success">
             @flash.get("saved")

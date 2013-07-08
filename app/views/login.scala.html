@@ -42,7 +42,7 @@
 
         <div class="container">
         @helper.form(routes.LoginController.authenticate, 'class -> "form-signin") {
-            <h2 class="form-signin-heading">Please sign in</h2>
+            <h2 class="form-signin-heading">@play.i18n.Messages.get("sign.in")</h2>
             <input type="text" name="accountname" placeholder="Accountname" value="@form("accountname").value" class="input-block-level">
             <input type="password" name="password" placeholder="Password" class="input-block-level">
             <button type="submit" class="btn btn-large btn-primary">Login</button>
