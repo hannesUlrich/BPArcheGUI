@@ -20,13 +20,18 @@ public class Daten extends Model {
 	public String value;
 	public String selected;
 	
-	public Daten(){}
-	
+
+    public void updateData(String value, String selected){
+        this.value = value == null || value.equals("") ? "" : value;
+        this.selected = selected == null || selected.equals("") ? "" : selected;
+        update();
+    }
+
 	public Daten(String userID, Archetype arche, String value, String selected) {
 		this.userID = userID;
 		this.archetype = arche;
-		this.value = value;
-		this.selected = selected;
+        this.value = value == null || value.equals("") ? "" : value;
+		this.selected = selected == null || selected.equals("") ? "" : selected;
 		save();
 	}
 
@@ -66,8 +71,13 @@ public class Daten extends Model {
 		update();
 	}
 
+    @Override
     public String toString(){
         return userID+archetype.getId()+value+selected;
+    }
+
+    public Archetype getArchetype(){
+        return archetype;
     }
 
 	public static Finder<Integer, Daten> find = new Finder<Integer, Daten>(Integer.class,Daten.class);

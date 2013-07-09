@@ -19,24 +19,25 @@ public class Element extends Model {
 	@Id
 	public int id;
 	public String type;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
+
+
+
+    @ManyToOne(cascade=CascadeType.ALL)
 	public Archetype archetype;
-	
+
+
+
 	@OneToMany
 	public List<Choice> choices;
 
-	public Element() {}
-	
 	public Element(Archetype arche, int name, String type, ArrayList<String> choices) {
 		this.id = name;
 		this.type = type;
 		this.archetype = arche;
-		this.choices = new ArrayList<Choice>();
+		this.choices = new ArrayList<>();
 		for (String text : choices) {
-			Choice temp = new Choice(count,text,this);
+			Choice temp = new Choice(count++,text,this);
 			addChoice(temp);
-			count++;
 		}
 		save();
 	}
@@ -47,6 +48,9 @@ public class Element extends Model {
 		this.archetype = arche;
 		save();
 	}
+    public Archetype getArchetype() {
+        return archetype;
+    }
 	
 	public int getId() {
 		return id;

@@ -1,0 +1,83 @@
+@(arche: Archetype)
+
+    @for(element: Element <- arche.getElements) {
+        @defining(Application.getDataFromDB(arche)) { data: Daten =>
+            @if(element.getType.equals("boolean")) {
+                @element.getArchetype.getName <br xmlns="http://www.w3.org/1999/html">
+                @if(data == null || data.getValue.equals("no")) {
+                    <input type="radio" name="@element.getId" value="yes"> @play.i18n.Messages.get("yes") <br>
+                    <input type="radio" name="@element.getId" checked="checked" value="no"> @play.i18n.Messages.get("no") <br> <br>
+                } else {
+                    <input type="radio" name="@element.getId" checked="checked" value="yes"> Yes <br>
+                    <input type="radio" name="@element.getId" value="no"> No <br> <br>
+                }
+            }
+            @if(element.getType.equals("stringlist")) {
+                @element.getArchetype.getName <br>
+                @if(!element.getChoices.isEmpty) {
+                    <select name="choice@element.getId">
+                    @for(choice: Choice <- element.getChoices) {
+                        @if(data != null && Integer.valueOf(data.getValue) + 5 == choice.getId) {
+                            <option value="@element.getChoices.indexOf(choice)" selected="selected">@choice.getChoice</option>
+                        } else {
+                            <option value="@element.getChoices.indexOf(choice)">@choice.getChoice</option>
+                        }
+                    }
+                    </select> <br>
+                }
+            }
+            @if(element.getType.equals("int")) {
+                @element.getArchetype.getName <br>
+
+                @if(data != null) {
+                    <input type="text" pattern="[0-9.]+" maxlength="3" name="@element.getId" value="@data.getValue">
+                } else {
+                    <input type="text" pattern="[0-9.]+" maxlength="3" name="@element.getId" value="0">
+                }
+                @if(!element.getChoices.isEmpty) {
+                    <select name="choice@element.getId">
+                    @for(choice: Choice <- element.getChoices) {
+                        @if(data != null && choice.getChoice.equals(data.getSelected)) {
+                            <option value="@choice.getChoice" selected="selected"> @choice.getChoice </option>
+                        } else {
+                            <option value="@choice.getChoice"> @choice.getChoice </option>
+                        }
+                    }
+                    </select> <br>
+                }
+
+            }
+            @if(arche.getUsedArchetypes.size() <= 0) {
+                @if(data != null) {
+                    <input type="submit" class="btn" value="@play.i18n.Messages.get("update")">
+                } else {
+                    <input type="submit" class="btn" value="@play.i18n.Messages.get("save")">
+                }
+            }
+        }
+    }
+    @if(arche.getUsedArchetypes.size() > 0) {
+        <div class="row">
+            <div class="span4">
+                <table class="table table-hover">
+                    <tr><th>Archetype</th><th>@play.i18n.Messages.get("save.db")</th></tr>
+                    @for(archeId: String <- arche.getUsedArchetypes) {
+                        <tr><th>@Archetype.find.byId(archeId).name</th>
+                            @if(Application.dataInDB(Archetype.find.byId(archeId))) {
+                                <th><i class="icon-ok"></i></th>
+                            } else {
+                                <th><i class="icon-remove"></i></th>
+                            }
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            @if(Application.allDataInDB(arche)){
+                BMI: @Application.calculateBMI() <br>
+                @play.i18n.Messages.get("submit") @Application.getPhysician
+            }
+        </div>
+
+    }
