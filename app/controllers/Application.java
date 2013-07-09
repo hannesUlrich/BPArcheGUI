@@ -5,6 +5,8 @@ import java.util.List;
 import models.Archetype;
 import models.Benutzer;
 import models.Daten;
+import play.api.i18n.Messages;
+import play.api.i18n.Messages.Message;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
