@@ -10,9 +10,8 @@ import play.Application;
 import play.GlobalSettings;
 import play.mvc.Action;
 import play.mvc.Http.Request;
-import utils.Components;
 import utils.Helper;
-import utils.Module;
+import utils.ArchetypeStorage;
 
 
 /**
@@ -39,20 +38,21 @@ public class Global extends GlobalSettings {
     public void checkingArchetypes() {
     	ArrayList<File> files = Helper.getFiles(new File(Helper.getCurrentDir()+"resource/"));
 		for (File aFile : files) {
-			Components comp = new Components(Helper.getCurrentDir()+"resource/"+aFile.getName());
-			try {
-				Module m = comp.getMainModule();
-				String id = m.getIdentifier();
-				String name = Helper.getArcheName(aFile.getName());
-				String purpose = m.getPurpose();
-				String usage = m.getUse();
-				String misusage = m.getMisuse();
+            //Components comp = new Components(Helper.getCurrentDir()+"resource/"+aFile.getName());
+            try {
+                ArchetypeStorage archeStorage = new ArchetypeStorage(Helper.getCurrentDir()+"resource/"+aFile.getName());
+                //Module m = comp.getMainModule();
+                String id = archeStorage.getIdentifier();
+                String name = Helper.getArcheName(aFile.getName());
+                String purpose = archeStorage.getPurpose();
+                String usage = archeStorage.getUse();
+                String misusage = archeStorage.getMisuse();
                 Archetype arche = new Archetype( id, name, purpose, usage, misusage);
-				Element ele = Element.find.byId(Helper.decideWhichType(arche ,count++, m.getDataElement().get(0).getValue("elementType"), m.getChoices()));
+                Element ele = Element.find.byId(Helper.decideWhichType(arche ,count++, archeStorage.getElementType(), archeStorage.getChoices()));
 				if (ele.type.equals("archetype")) {
-					ArrayList<Module> mods = comp.getUses();
-                    for (Module mod : mods) {
-                        arche.addUsedArchetypeId(mod.getIdentifier());
+					ArrayList<String> mods = archeStorage.getUses();
+                    for (String s : mods) {
+                        arche.addUsedArchetypeId(s);
 					}
 				}
 				arche.addElement(ele);
