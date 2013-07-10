@@ -85,7 +85,6 @@ public class XPathReader {
                 list.add(value);
             }
         }
-        System.out.println("nodeListBook = " + list.size());
         return list;
     }
 }
