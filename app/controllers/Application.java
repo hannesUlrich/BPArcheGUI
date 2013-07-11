@@ -44,6 +44,16 @@ public class Application extends Controller {
         return redirect(routes.LoginController.login());
     }
 
+    public static Result changeThemen() {
+    	Benutzer benutzer = Benutzer.find.byId(session("accountname"));
+    	if (benutzer.getThemenType() == 0 ) {
+    		benutzer.setThemenType(1);
+    	} else {
+    		benutzer.setThemenType(0);
+    	}
+    	List<Archetype> names = Archetype.find.all();
+        return ok(index.render(benutzer, names));
+    }
 
     public static Result saveForm(String archeID) {
         DynamicForm dynForm = Form.form().bindFromRequest();

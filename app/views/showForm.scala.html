@@ -1,14 +1,12 @@
 @(loggedInUser: Benutzer, names: List[Archetype], arche: Archetype)
 @main(loggedInUser, names) {
-    <body>
         <form method="post" action="@routes.Application.saveForm(arche.getId)">
-        @showArchetype(arche)
+        @showArchetype(arche, loggedInUser)
         </form>
         @if(flash.contains("saved")) {
             <p class="alert-success">
             @flash.get("saved")
             </p>
         }
-    </body>
 }
 

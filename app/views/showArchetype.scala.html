@@ -1,15 +1,29 @@
-@(arche: Archetype)
+@(arche: Archetype, loggedInUser: Benutzer)
 
     @for(element: Element <- arche.getElements) {
         @defining(Application.getDataFromDB(arche)) { data: Daten =>
             @if(element.getType.equals("boolean")) {
                 @element.getArchetype.getName <br xmlns="http://www.w3.org/1999/html">
                 @if(data == null || data.getValue.equals("no")) {
-                    <input type="radio" name="@element.getId" value="yes"> @play.i18n.Messages.get("yes") <br>
-                    <input type="radio" name="@element.getId" checked="checked" value="no"> @play.i18n.Messages.get("no") <br> <br>
+                    @if(loggedInUser.getThemenType==0){
+                    	<input type="radio" name="@element.getId" value="yes"> @play.i18n.Messages.get("yes") <br>
+                    	<input type="radio" name="@element.getId" checked="checked" value="no"> @play.i18n.Messages.get("no") <br> <br>
+                	} else { 
+                		<select name="@element.getId">
+                			<option value="yes"> @play.i18n.Messages.get("yes") </option>
+                			<option value="no" checked="checked"> @play.i18n.Messages.get("no") </option>
+                		</select>
+                	}
                 } else {
-                    <input type="radio" name="@element.getId" checked="checked" value="yes"> Yes <br>
-                    <input type="radio" name="@element.getId" value="no"> No <br> <br>
+                	@if(loggedInUser.getThemenType==0){
+                    <input type="radio" name="@element.getId" checked="checked" value="yes"> @play.i18n.Messages.get("yes") <br>
+                    <input type="radio" name="@element.getId" value="no"> @play.i18n.Messages.get("no") <br> <br>
+                    } else {
+                   		<select name="@element.getId" size="2">
+                			<option value="yes" checked="checked"> @play.i18n.Messages.get("yes") </option>
+                			<option value="no" > @play.i18n.Messages.get("no") </option>
+                		</select>
+                    }
                 }
             }
             @if(element.getType.equals("stringlist")) {
@@ -30,9 +44,19 @@
                 @element.getArchetype.getName <br>
 
                 @if(data != null) {
-                    <input type="text" pattern="[0-9.]+" maxlength="3" name="@element.getId" value="@data.getValue">
+	                @if(loggedInUser.getThemenType==0){
+	                	<input type="number" pattern="[0-9.]+" maxlength="3" min="0" max="200" name="@element.getId" value="@data.getValue">
+	                } else {
+	               		<input type="number" id="rangeValue1" value="@data.getValue">
+	                	<input type="range" id="slider1" name="@element.getId"  min="0" max="200"  value="@data.getValue" onchange="printValue('slider1','rangeValue1')" name="@element.getId">
+	                }
                 } else {
-                    <input type="text" pattern="[0-9.]+" maxlength="3" name="@element.getId" value="0">
+                	@if(loggedInUser.getThemenType==0){ 
+                		<input type="number" pattern="[0-9.]+" min="0" max="200" maxlength="3" name="@element.getId" value="0">
+                	} else {
+                		<input type="number" id="rangeValue1" >
+                		<input type="range" id="slider1" name="@element.getId" value="100" min="0" max="200"  onchange="printValue('slider1','rangeValue1')" pattern="[0-9.]+" maxlength="3" name="@element.getId" value="0">
+                	}
                 }
                 @if(!element.getChoices.isEmpty) {
                     <select name="choice@element.getId">
@@ -80,4 +104,6 @@
             }
         </div>
 
-    }
+}
+
+

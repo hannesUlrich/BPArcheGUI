@@ -16,6 +16,7 @@ create table benutzer (
   accountname               varchar(255) not null,
   password                  varchar(255),
   full_name                 varchar(255),
+  themen_type               integer,
   constraint pk_benutzer primary key (accountname))
 ;
 

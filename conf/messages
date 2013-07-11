@@ -8,3 +8,6 @@ welcome=Willkommen
 modal.purpose= Verwendung
 modal.usage= Gebrauch
 modal.misusage= falscher Gebrauch
+submit= Eingetragen von
+logout= Logout
+changeThemen= Darstellung ändern

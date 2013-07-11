@@ -40,14 +40,10 @@ public class LoginController extends Controller{
         if (loginForm.hasErrors()) {
             return badRequest(register.render(loginForm));
         } else {
-            new Benutzer(loginForm.get().accountname,loginForm.get().password,loginForm.get().fullName).save();
+            new Benutzer(loginForm.get().accountname,loginForm.get().password,loginForm.get().fullName,0).save();
             return redirect(routes.Application.index());
         }
     }
-
-
-
-
 
     public static class Login{
         public String accountname;
@@ -83,6 +79,5 @@ public class LoginController extends Controller{
             }
             return null;
         }
-
     }
 }

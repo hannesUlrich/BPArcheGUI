@@ -1,15 +1,11 @@
 import java.io.File;
 import java.util.ArrayList;
 
-import play.*;
-
 import models.Archetype;
 import models.Benutzer;
 import models.Element;
 import play.Application;
 import play.GlobalSettings;
-import play.mvc.Action;
-import play.mvc.Http.Request;
 import utils.Components;
 import utils.Helper;
 import utils.Module;
@@ -29,7 +25,8 @@ public class Global extends GlobalSettings {
     @Override
     public void onStart(Application app) {
         if(Benutzer.find.findRowCount()==0){
-            new Benutzer("daniel", "1234", "Daniel Rehmann").save();
+            new Benutzer("daniel", "1234", "Daniel Rehmann", 0).save();
+            new Benutzer("hannes", "1234", "Hannes Ulrich", 1).save();
         }
         if (Archetype.find.findRowCount() == 0) {
         	checkingArchetypes();

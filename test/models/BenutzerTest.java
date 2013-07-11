@@ -21,7 +21,7 @@ public class BenutzerTest extends WithApplication{
 
     @Test
     public void createAndRetrieveUser() {
-        new Benutzer("jupp", "1234", "Daniel Rehmann").save();
+        new Benutzer("jupp", "1234", "Daniel Rehmann", 0).save();
         Benutzer daniel = Benutzer.find.where().eq("accountname", "jupp").findUnique();
         Assert.assertNotNull(daniel);
         Assert.assertEquals("jupp", daniel.accountname);

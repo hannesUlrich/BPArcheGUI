@@ -12,14 +12,25 @@ public class Benutzer extends Model{
     public String accountname;
     public String password;
     public String fullName;
+    public int themenType;
 
-    public Benutzer(String accountname, String password, String fullName) {
+    public Benutzer(String accountname, String password, String fullName, int themenType) {
         this.accountname = accountname;
         this.password = password;
         this.fullName = fullName;
+        this.themenType = themenType;
     }
 
-    public static Benutzer authenticate(String accountname, String password){
+    public int getThemenType() {
+		return themenType;
+	}
+
+	public void setThemenType(int themenType) {
+		this.themenType = themenType;
+		update();
+	}
+
+	public static Benutzer authenticate(String accountname, String password){
         return find.where().eq("accountname",accountname).eq("password",password).findUnique();
     }
     public static Finder<String, Benutzer> find = new Finder<>(
