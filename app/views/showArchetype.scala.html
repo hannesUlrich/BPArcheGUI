@@ -47,14 +47,14 @@
 	                @if(loggedInUser.getThemenType==0){
 	                	<input type="number" pattern="[0-9.]+" maxlength="3" min="0" max="200" name="@element.getId" value="@data.getValue">
 	                } else {
-	               		<input type="number" id="rangeValue1" value="@data.getValue">
+	               		<input type="number" id="rangeValue1" name="@element.getId" value="@data.getValue" >
 	                	<input type="range" id="slider1" name="@element.getId"  min="0" max="200"  value="@data.getValue" onchange="printValue('slider1','rangeValue1')" name="@element.getId">
 	                }
                 } else {
                 	@if(loggedInUser.getThemenType==0){ 
                 		<input type="number" pattern="[0-9.]+" min="0" max="200" maxlength="3" name="@element.getId" value="0">
                 	} else {
-                		<input type="number" id="rangeValue1" >
+                		<input type="number" id="rangeValue1" name="@element.getId" >
                 		<input type="range" id="slider1" name="@element.getId" value="100" min="0" max="200"  onchange="printValue('slider1','rangeValue1')" pattern="[0-9.]+" maxlength="3" name="@element.getId" value="0">
                 	}
                 }
