@@ -6,11 +6,6 @@ import models.Benutzer;
 import models.Element;
 import play.Application;
 import play.GlobalSettings;
-<<<<<<< HEAD
-=======
-import play.mvc.Action;
-import play.mvc.Http.Request;
->>>>>>> ff56f40c7feebab5b2e4d31d29b8f9b198c9e059
 import utils.Helper;
 import utils.ArchetypeStorage;
 
