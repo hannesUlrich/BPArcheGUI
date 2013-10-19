@@ -20,7 +20,12 @@ public class XPathReader {
     private XPath xPath;
     private Document xmlDocument;
     private XPathExpression xPathExpression;
-    private String filePath;
+    private String identifier;
+
+    public XPathReader(String filePath, String id,boolean execWithFile) throws  Exception{
+        this(filePath);
+        identifier = execWithFile ?  Helper.extractFileNameWithoutEnding(filePath) : id;
+    }
 
     public XPathReader(String path) throws  Exception{
         // loading the XML document from a file
@@ -30,17 +35,17 @@ public class XPathReader {
 
         DocumentBuilder builder = builderfactory.newDocumentBuilder();
         File file = new File(path);
-        filePath = path;
 
         xmlDocument = builder.parse(file);
 
         XPathFactory factory = javax.xml.xpath.XPathFactory.newInstance();
         xPath = factory.newXPath();
+        identifier = Helper.extractFileNameWithoutEnding(path);
     }
 
     public ArrayList<String> getUses() throws Exception{
         ArrayList<String> list = new ArrayList<>();
-        xPathExpression = xPath.compile("//archetype[//concept[identifier='" + Helper.extractFileNameWithoutEnding(filePath) + "']]/uses/use");
+        xPathExpression = xPath.compile("//archetype[//concept[identifier='" + identifier + "']]/uses/use");
         NodeList nodeListBook = (NodeList) xPathExpression.evaluate(
                 xmlDocument, XPathConstants.NODESET);
 
@@ -52,21 +57,21 @@ public class XPathReader {
     }
 
     public String getIdentifier() throws Exception{
-        xPathExpression = xPath.compile("//archetype[./concept/identifier='" + Helper.extractFileNameWithoutEnding(filePath) + "']//identifier");
+        xPathExpression = xPath.compile("//archetype[./concept/identifier='" + identifier + "']//identifier");
         String value = xPathExpression.evaluate(
                 xmlDocument, XPathConstants.STRING).toString();
         return value;
     }
 
     public String getValue(String tag) throws Exception{
-        xPathExpression = xPath.compile("//archetype[./concept/identifier='" + Helper.extractFileNameWithoutEnding(filePath) + "']//description/" + tag);
+        xPathExpression = xPath.compile("//archetype[./concept/identifier='" + identifier + "']//description/" + tag);
         String value = xPathExpression.evaluate(
                 xmlDocument, XPathConstants.STRING).toString();
         return value;
     }
 
     public String getElementType() throws Exception{
-        xPathExpression = xPath.compile("//archetype[./concept/identifier='" + Helper.extractFileNameWithoutEnding(filePath) + "']//DataElement/@elementType");
+        xPathExpression = xPath.compile("//archetype[./concept/identifier='" + identifier + "']//DataElement/@elementType");
         String value = xPathExpression.evaluate(
                 xmlDocument, XPathConstants.STRING).toString();
         return value;
@@ -75,7 +80,7 @@ public class XPathReader {
 
     public ArrayList<String> getChoices() throws Exception{
         ArrayList<String> list = new ArrayList<>();
-        xPathExpression = xPath.compile("//archetype[//concept[identifier='" + Helper.extractFileNameWithoutEnding(filePath) + "']]//choices/item");
+        xPathExpression = xPath.compile("//archetype[//concept[identifier='" + identifier + "']]//choices/item");
         NodeList nodeListBook = (NodeList) xPathExpression.evaluate(
                 xmlDocument, XPathConstants.NODESET);
 
@@ -83,6 +88,18 @@ public class XPathReader {
             String value = nodeListBook.item(index).getAttributes().item(nodeListBook.item(index).getAttributes().getLength()-1).getTextContent();
             if (value != null && !value.equals("")){
                 list.add(value);
+            }
+        }
+
+        XPathExpression xPathExpression2 = xPath.compile("../archetype[//concept[identifier='" + identifier + "']]//choices/item");
+        NodeList nodeListBook2 = (NodeList) xPathExpression2.evaluate(
+                xmlDocument, XPathConstants.NODESET);
+        ArrayList<String> list2 = new ArrayList<>();
+        for (int index = 0; index < nodeListBook2.getLength(); index++) {
+            String value = nodeListBook2.item(index).getAttributes().item(nodeListBook2.item(index).getAttributes().getLength()-1).getTextContent();
+            if (value != null && !value.equals("")){
+                System.out.println("value = " + value);
+                list2.add(value);
             }
         }
         return list;

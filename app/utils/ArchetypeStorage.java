@@ -15,7 +15,7 @@ public class ArchetypeStorage {
     public ArchetypeStorage(String path) throws Exception{
         XPathReader reader = new XPathReader(path);
         use = reader.getValue("use");
-        misuse = reader.getValue("use");
+        misuse = reader.getValue("misuse");
         purpose = reader.getValue("purpose");
         identifier = reader.getIdentifier();
         elementType = reader.getElementType();

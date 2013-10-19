@@ -1,5 +1,4 @@
 @(arche: Archetype, loggedInUser: Benutzer)
-
     @for(element: Element <- arche.getElements) {
         @defining(Application.getDataFromDB(arche)) { data: Daten =>
             @if(element.getType.equals("boolean")) {

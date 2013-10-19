@@ -25,7 +25,7 @@ public class Archetype extends Model {
 
 	public Archetype(String id, String name, String purpose, String usage, String misusage) {
 		this.id = id;
-		this.name = name;
+        this.name = name;
 		this.purpose = purpose;
 		this.usage = usage;
 		this.misusage = misusage;

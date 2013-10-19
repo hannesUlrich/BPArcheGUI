@@ -137,7 +137,8 @@ public class Helper {
      * @return
      */
     public static String getArcheName(String name) {
-        return name.substring(10, name.indexOf("."));
+        int pos = name.indexOf("-",name.indexOf("-")+1)+1;
+        return name.substring(pos, name.indexOf("."));
     }
 
     /**
@@ -175,6 +176,9 @@ public class Helper {
 		} else if (type.equalsIgnoreCase("mtStringlist")) {
 			Element e = new Element(arche, id, "stringlist", choices);
 			return e.id;
+        } else if (type.equalsIgnoreCase("mtString")) {
+            Element e = new Element(arche, id, "string", choices);
+            return e.id;
 		} else {
 			return 0;
 		}

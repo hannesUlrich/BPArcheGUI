@@ -1,0 +1,1093 @@
+<?xml version="1.0"?>
+<moa:moArchetypes xmlns:moa="http://schemas.medical-objects.com.au/archetypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<archetype useage="openEHR" published="false">
+		<concept>
+			<identifier>CEN-EN13606-Template-Messwerte-Ruhe-EKG.v1</identifier>
+			<text/>
+			<nameOfCodingSystem/>
+		</concept>
+		<uses>
+			<use>CEN-EN13606-Hearth-frequency.v1</use>
+			<use>CEN-EN13606-PP-Interval</use>
+			<use>CEN-EN13606-PQ-Interval.v1</use>
+			<use>CEN-EN13606-QRS-Angle.v1</use>
+			<use>CEN-EN13606-QRS-Interval.v1</use>
+			<use>CEN-EN13606-QTc-Interval.v1</use>
+			<use>CEN-EN13606-QT-Interval.v1</use>
+			<use>CEN-EN13606-Rawdata.v1</use>
+			<use>CEN-EN13606-RR-Interval.v1</use>
+		</uses>
+		<description>
+			<author/>
+			<submission>
+				<organisation>
+					<namespaceID>Medical-Objects</namespaceID>
+					<universalID/>
+					<universalIDType/>
+				</organisation>
+				<date>2011-11-01T14:03:47.429Z</date>
+			</submission>
+			<version>1</version>
+			<status>Draft</status>
+			<revision>1</revision>
+			<diagnosticServiceSection/>
+			<labNumberSuffix/>
+			<confidentialityCode>U</confidentialityCode>
+			<description lang="EN">
+				<purpose/>
+				<use/>
+				<misuse/>
+			</description>
+			<rights/>
+			<xslVersion>0.9</xslVersion>
+			<keyWords/>
+			<universalServiceID identifier="" text="" nameOfCodingSystem="" alternateIdentifier="" alternateText="" nameOfAlternateCodingSystem=""/>
+		</description>
+		<definition>
+			<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="ENTRY" id="at0002" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+				<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="items" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false"/>
+				<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0005" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+					<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" elementType="mtArchetype" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+						<useArchetype>
+							<HL7Datatypes>ANY</HL7Datatypes>
+							<archetypeID>CEN-EN13606-Hearth-frequency.v1</archetypeID>
+							<objectType/>
+						</useArchetype>
+					</DataElement>
+					<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" elementType="mtArchetype" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+						<useArchetype>
+							<HL7Datatypes>ANY</HL7Datatypes>
+							<archetypeID>CEN-EN13606-PQ-Interval.v1</archetypeID>
+							<objectType/>
+						</useArchetype>
+					</DataElement>
+					<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" elementType="mtArchetype" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+						<useArchetype>
+							<HL7Datatypes>ANY</HL7Datatypes>
+							<archetypeID>CEN-EN13606-QRS-Interval.v1</archetypeID>
+							<objectType/>
+						</useArchetype>
+					</DataElement>
+					<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" elementType="mtArchetype" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+						<useArchetype>
+							<HL7Datatypes>ANY</HL7Datatypes>
+							<archetypeID>CEN-EN13606-QRS-Angle.v1</archetypeID>
+							<objectType/>
+						</useArchetype>
+					</DataElement>
+					<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" elementType="mtArchetype" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+						<useArchetype>
+							<HL7Datatypes>ANY</HL7Datatypes>
+							<archetypeID>CEN-EN13606-QT-Interval.v1</archetypeID>
+							<objectType/>
+						</useArchetype>
+					</DataElement>
+					<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" elementType="mtArchetype" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+						<useArchetype>
+							<HL7Datatypes>ANY</HL7Datatypes>
+							<archetypeID>CEN-EN13606-QTc-Interval.v1</archetypeID>
+							<objectType/>
+						</useArchetype>
+					</DataElement>
+					<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" elementType="mtArchetype" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+						<useArchetype>
+							<HL7Datatypes>ANY</HL7Datatypes>
+							<archetypeID>CEN-EN13606-PP-Interval</archetypeID>
+							<objectType/>
+						</useArchetype>
+					</DataElement>
+					<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" elementType="mtArchetype" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+						<useArchetype>
+							<HL7Datatypes>ANY</HL7Datatypes>
+							<archetypeID>CEN-EN13606-RR-Interval.v1</archetypeID>
+							<objectType/>
+						</useArchetype>
+					</DataElement>
+				</DataGroup>
+				<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0006" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+					<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" elementType="mtArchetype" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+						<useArchetype>
+							<HL7Datatypes>ANY</HL7Datatypes>
+							<archetypeID>CEN-EN13606-Rawdata.v1</archetypeID>
+							<objectType/>
+						</useArchetype>
+					</DataElement>
+				</DataGroup>
+			</DataGroup>
+		</definition>
+		<ontology defaultOntology="SNOMED-CT">
+			<termDefinitions>
+				<termDefinition language="en">
+					<item localCode="at0002">
+						<text>Messwerte</text>
+						<description>Messwerte</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0003">
+						<text>Zugeordnet</text>
+						<description>Zugeordnet</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0004">
+						<text>ZUgeordnet</text>
+						<description>Zugeordnet</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0005">
+						<text>Zugeordnet</text>
+						<description>Zugeordnet</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0006">
+						<text>Rohdaten</text>
+						<description>Rohdaten</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+				</termDefinition>
+			</termDefinitions>
+			<termBindings/>
+			<constraintDefinitions/>
+			<constraintBindings/>
+		</ontology>
+		<presentation>
+			<css/>
+			<header/>
+			<footer/>
+		</presentation>
+	</archetype>
+	<archetype useage="openEHR" published="false">
+		<concept>
+			<identifier>CEN-EN13606-Hearth-frequency.v1</identifier>
+			<text>Heart frequency</text>
+			<nameOfCodingSystem/>
+		</concept>
+		<uses/>
+		<description>
+			<author/>
+			<submission>
+				<organisation>
+					<namespaceID>Medical-Objects</namespaceID>
+					<universalID/>
+					<universalIDType/>
+				</organisation>
+				<date>2011-11-01T10:26:43.781Z</date>
+			</submission>
+			<version>1</version>
+			<status>Draft</status>
+			<revision>1</revision>
+			<diagnosticServiceSection/>
+			<labNumberSuffix/>
+			<confidentialityCode>U</confidentialityCode>
+			<description lang="EN">
+				<purpose>To detect the hearth frequency</purpose>
+				<use/>
+				<misuse>Not to detect the max of hearth frequency.</misuse>
+			</description>
+			<rights/>
+			<xslVersion>0.9</xslVersion>
+			<keyWords/>
+			<universalServiceID identifier="" text="" nameOfCodingSystem="" alternateIdentifier="" alternateText="" nameOfAlternateCodingSystem=""/>
+		</description>
+		<definition>
+			<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="ENTRY" id="at0003" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+				<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="items" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false"/>
+				<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0002" elementType="mtQuantity" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+					<quantity>
+						<HL7Datatypes/>
+						<choices property="">
+							<item units="/min" range=""/>
+						</choices>
+						<defaultIndex>0</defaultIndex>
+						<format decimalPlaces="0"/>
+					</quantity>
+				</DataElement>
+			</DataGroup>
+		</definition>
+		<ontology defaultOntology="SNOMED-CT">
+			<termDefinitions>
+				<termDefinition language="en">
+					<item localCode="at0002">
+						<text>Herzfrequenz</text>
+						<description>Herzfrequenz</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0003">
+						<text>Herzfrequenz</text>
+						<description>Herzfrequenz</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+				</termDefinition>
+			</termDefinitions>
+			<termBindings>
+				<termBinding terminology="11073 MDC">
+					<binding localCode="at0002" targetCode="MDC_ECG_HEART_RATE"/>
+				</termBinding>
+			</termBindings>
+			<constraintDefinitions/>
+			<constraintBindings/>
+		</ontology>
+		<presentation>
+			<css/>
+			<header/>
+			<footer/>
+		</presentation>
+	</archetype>
+	<archetype useage="openEHR" published="false">
+		<concept>
+			<identifier>CEN-EN13606-PQ-Interval.v1</identifier>
+			<text>PQ Interval</text>
+			<nameOfCodingSystem/>
+		</concept>
+		<uses/>
+		<description>
+			<author/>
+			<submission>
+				<organisation>
+					<namespaceID>Medical-Objects</namespaceID>
+					<universalID/>
+					<universalIDType/>
+				</organisation>
+				<date>2011-11-01T10:26:43.781Z</date>
+			</submission>
+			<version>1</version>
+			<status>Draft</status>
+			<revision>1</revision>
+			<diagnosticServiceSection/>
+			<labNumberSuffix/>
+			<confidentialityCode>U</confidentialityCode>
+			<description lang="EN">
+				<purpose>To detect the PQ Interval.</purpose>
+				<use/>
+				<misuse/>
+			</description>
+			<rights/>
+			<xslVersion>0.9</xslVersion>
+			<keyWords/>
+			<universalServiceID identifier="" text="" nameOfCodingSystem="" alternateIdentifier="" alternateText="" nameOfAlternateCodingSystem=""/>
+		</description>
+		<definition>
+			<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="ENTRY" id="at0004" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+				<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="items" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false"/>
+				<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0003" elementType="mtQuantity" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+					<quantity>
+						<HL7Datatypes/>
+						<choices property="">
+							<item units="ms" range=""/>
+						</choices>
+						<defaultIndex>0</defaultIndex>
+						<format decimalPlaces="0"/>
+					</quantity>
+				</DataElement>
+			</DataGroup>
+		</definition>
+		<ontology defaultOntology="SNOMED-CT">
+			<termDefinitions>
+				<termDefinition language="en">
+					<item localCode="at0002">
+						<text>Herzfrequenz</text>
+						<description>Herzfrequenz</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0003">
+						<text>PQ Intervall</text>
+						<description>PQ Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0004">
+						<text>PQ Intervall</text>
+						<description>PQ Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+				</termDefinition>
+			</termDefinitions>
+			<termBindings>
+				<termBinding terminology="11073 MDC">
+					<binding localCode="at0002" targetCode="MDC_ECG_HEART_RATE"/>
+					<binding localCode="at0003" targetCode="MDC_ECG_TIME_PD_PQ"/>
+				</termBinding>
+			</termBindings>
+			<constraintDefinitions/>
+			<constraintBindings/>
+		</ontology>
+		<presentation>
+			<css/>
+			<header/>
+			<footer/>
+		</presentation>
+	</archetype>
+	<archetype useage="openEHR" published="false">
+		<concept>
+			<identifier>CEN-EN13606-Rawdata.v1</identifier>
+			<text>Rawdata</text>
+			<nameOfCodingSystem/>
+		</concept>
+		<uses/>
+		<description>
+			<author/>
+			<submission>
+				<organisation>
+					<namespaceID>Medical-Objects</namespaceID>
+					<universalID/>
+					<universalIDType/>
+				</organisation>
+				<date>2011-11-01T12:38:29.224Z</date>
+			</submission>
+			<version>1</version>
+			<status>Draft</status>
+			<revision>1</revision>
+			<diagnosticServiceSection/>
+			<labNumberSuffix/>
+			<confidentialityCode>U</confidentialityCode>
+			<description lang="EN">
+				<purpose/>
+				<use/>
+				<misuse/>
+			</description>
+			<rights/>
+			<xslVersion>0.9</xslVersion>
+			<keyWords/>
+			<universalServiceID identifier="" text="" nameOfCodingSystem="" alternateIdentifier="" alternateText="" nameOfAlternateCodingSystem=""/>
+		</description>
+		<definition>
+			<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="ENTRY" id="at0003" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+				<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="items" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false"/>
+				<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0002" elementType="mtString" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+					<string>
+						<HL7Datatypes>ST</HL7Datatypes>
+						<matchValue/>
+					</string>
+				</DataElement>
+			</DataGroup>
+		</definition>
+		<ontology defaultOntology="SNOMED-CT">
+			<termDefinitions>
+				<termDefinition language="en">
+					<item localCode="at0002">
+						<text>Rohdaten</text>
+						<description>Rohdaten</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0003">
+						<text>Rohdaten</text>
+						<description>Rohdaten</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+				</termDefinition>
+			</termDefinitions>
+			<termBindings/>
+			<constraintDefinitions/>
+			<constraintBindings/>
+		</ontology>
+		<presentation>
+			<css/>
+			<header/>
+			<footer/>
+		</presentation>
+	</archetype>
+	<archetype useage="openEHR" published="false">
+		<concept>
+			<identifier>CEN-EN13606-QRS-Interval.v1</identifier>
+			<text>QRS Interval</text>
+			<nameOfCodingSystem/>
+		</concept>
+		<uses/>
+		<description>
+			<author/>
+			<submission>
+				<organisation>
+					<namespaceID>Medical-Objects</namespaceID>
+					<universalID/>
+					<universalIDType/>
+				</organisation>
+				<date>2011-11-01T10:26:43.781Z</date>
+			</submission>
+			<version>1</version>
+			<status>Draft</status>
+			<revision>1</revision>
+			<diagnosticServiceSection/>
+			<labNumberSuffix/>
+			<confidentialityCode>U</confidentialityCode>
+			<description lang="EN">
+				<purpose/>
+				<use/>
+				<misuse/>
+			</description>
+			<rights/>
+			<xslVersion>0.9</xslVersion>
+			<keyWords/>
+			<universalServiceID identifier="" text="" nameOfCodingSystem="" alternateIdentifier="" alternateText="" nameOfAlternateCodingSystem=""/>
+		</description>
+		<definition>
+			<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="ENTRY" id="at0010" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+				<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="items" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false"/>
+				<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0011" elementType="mtQuantity" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+					<quantity>
+						<HL7Datatypes/>
+						<choices property="">
+							<item units="ms" range="60-100"/>
+						</choices>
+						<defaultIndex>0</defaultIndex>
+						<format decimalPlaces="0"/>
+					</quantity>
+				</DataElement>
+			</DataGroup>
+		</definition>
+		<ontology defaultOntology="SNOMED-CT">
+			<termDefinitions>
+				<termDefinition language="en">
+					<item localCode="at0002">
+						<text>Herzfrequenz</text>
+						<description>Herzfrequenz</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0003">
+						<text>PQ Intervall</text>
+						<description>PQ Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0004">
+						<text>QT Intervall</text>
+						<description>QT Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0005">
+						<text>QTc Intervall</text>
+						<description>QTc Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0006">
+						<text>PP Intervall</text>
+						<description>PP Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0007">
+						<text>RR Intervall</text>
+						<description>RR Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0008">
+						<text>QRS Winkel</text>
+						<description>QRS Winkel</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0009">
+						<text>QRS Intervall</text>
+						<description>QRS Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0010">
+						<text>QRS Dauer</text>
+						<description>QRS Dauer</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0011">
+						<text>QRS Dauer</text>
+						<description>QRS Dauer</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+				</termDefinition>
+			</termDefinitions>
+			<termBindings>
+				<termBinding terminology="11073 MDC">
+					<binding localCode="at0002" targetCode="MDC_ECG_HEART_RATE"/>
+					<binding localCode="at0003" targetCode="MDC_ECG_TIME_PD_PQ"/>
+					<binding localCode="at0004" targetCode="MDC_ECG_TIME_PD_QT"/>
+					<binding localCode="at0005" targetCode="MDC_ECG_TIME_PD_QT_CORR"/>
+					<binding localCode="at0006" targetCode="MDC_ECG_TIME_PD_PP_GL"/>
+					<binding localCode="at0007" targetCode="MDC_ECG_TIME_PD_RR_GL"/>
+					<binding localCode="at0008" targetCode="MDC_ECG_ANGLE_QRS_FRON"/>
+					<binding localCode="at0009" targetCode="MDC_ECG_TIME_PD_QRS_GL"/>
+				</termBinding>
+			</termBindings>
+			<constraintDefinitions/>
+			<constraintBindings/>
+		</ontology>
+		<presentation>
+			<css/>
+			<header/>
+			<footer/>
+		</presentation>
+	</archetype>
+	<archetype useage="openEHR" published="false">
+		<concept>
+			<identifier>CEN-EN13606-QRS-Angle.v1</identifier>
+			<text>the angle of the heart.</text>
+			<nameOfCodingSystem/>
+		</concept>
+		<uses/>
+		<description>
+			<author/>
+			<submission>
+				<organisation>
+					<namespaceID>Medical-Objects</namespaceID>
+					<universalID/>
+					<universalIDType/>
+				</organisation>
+				<date>2011-11-01T10:26:43.781Z</date>
+			</submission>
+			<version>1</version>
+			<status>Draft</status>
+			<revision>1</revision>
+			<diagnosticServiceSection/>
+			<labNumberSuffix/>
+			<confidentialityCode>U</confidentialityCode>
+			<description lang="EN">
+				<purpose>The angle of the heart.</purpose>
+				<use/>
+				<misuse/>
+			</description>
+			<rights/>
+			<xslVersion>0.9</xslVersion>
+			<keyWords/>
+			<universalServiceID identifier="" text="" nameOfCodingSystem="" alternateIdentifier="" alternateText="" nameOfAlternateCodingSystem=""/>
+		</description>
+		<definition>
+			<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="ENTRY" id="at0012" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+				<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="items" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false"/>
+				<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0013" elementType="mtQuantity" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+					<quantity>
+						<HL7Datatypes/>
+						<choices property="">
+							<item units="Grad" range=""/>
+						</choices>
+						<defaultIndex>0</defaultIndex>
+						<format decimalPlaces="0"/>
+					</quantity>
+				</DataElement>
+			</DataGroup>
+		</definition>
+		<ontology defaultOntology="SNOMED-CT">
+			<termDefinitions>
+				<termDefinition language="en">
+					<item localCode="at0002">
+						<text>Herzfrequenz</text>
+						<description>Herzfrequenz</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0003">
+						<text>PQ Intervall</text>
+						<description>PQ Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0004">
+						<text>QT Intervall</text>
+						<description>QT Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0005">
+						<text>QTc Intervall</text>
+						<description>QTc Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0006">
+						<text>PP Intervall</text>
+						<description>PP Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0007">
+						<text>RR Intervall</text>
+						<description>RR Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0008">
+						<text>QRS Winkel</text>
+						<description>QRS Winkel</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0009">
+						<text>QRS Intervall</text>
+						<description>QRS Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0010">
+						<text>QRS Dauer</text>
+						<description>QRS Dauer</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0011">
+						<text>QRS Dauer</text>
+						<description>QRS Dauer</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0012">
+						<text>QRS Winkel</text>
+						<description>QRS Winkel</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0013">
+						<text>QRS Winkel</text>
+						<description>QRS Winkel</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+				</termDefinition>
+			</termDefinitions>
+			<termBindings>
+				<termBinding terminology="11073 MDC">
+					<binding localCode="at0002" targetCode="MDC_ECG_HEART_RATE"/>
+					<binding localCode="at0003" targetCode="MDC_ECG_TIME_PD_PQ"/>
+					<binding localCode="at0004" targetCode="MDC_ECG_TIME_PD_QT"/>
+					<binding localCode="at0005" targetCode="MDC_ECG_TIME_PD_QT_CORR"/>
+					<binding localCode="at0006" targetCode="MDC_ECG_TIME_PD_PP_GL"/>
+					<binding localCode="at0007" targetCode="MDC_ECG_TIME_PD_RR_GL"/>
+					<binding localCode="at0008" targetCode="MDC_ECG_ANGLE_QRS_FRON"/>
+					<binding localCode="at0009" targetCode="MDC_ECG_TIME_PD_QRS_GL"/>
+				</termBinding>
+			</termBindings>
+			<constraintDefinitions/>
+			<constraintBindings/>
+		</ontology>
+		<presentation>
+			<css/>
+			<header/>
+			<footer/>
+		</presentation>
+	</archetype>
+	<archetype useage="openEHR" published="false">
+		<concept>
+			<identifier>CEN-EN13606-QT-Interval.v1</identifier>
+			<text>QT interval</text>
+			<nameOfCodingSystem/>
+		</concept>
+		<uses/>
+		<description>
+			<author/>
+			<submission>
+				<organisation>
+					<namespaceID>Medical-Objects</namespaceID>
+					<universalID/>
+					<universalIDType/>
+				</organisation>
+				<date>2011-11-01T10:26:43.781Z</date>
+			</submission>
+			<version>1</version>
+			<status>Draft</status>
+			<revision>1</revision>
+			<diagnosticServiceSection/>
+			<labNumberSuffix/>
+			<confidentialityCode>U</confidentialityCode>
+			<description lang="EN">
+				<purpose/>
+				<use/>
+				<misuse/>
+			</description>
+			<rights/>
+			<xslVersion>0.9</xslVersion>
+			<keyWords/>
+			<universalServiceID identifier="" text="" nameOfCodingSystem="" alternateIdentifier="" alternateText="" nameOfAlternateCodingSystem=""/>
+		</description>
+		<definition>
+			<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="ENTRY" id="at0005" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+				<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="items" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false"/>
+				<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0004" elementType="mtQuantity" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+					<quantity>
+						<HL7Datatypes/>
+						<choices property="">
+							<item units="ms" range=""/>
+						</choices>
+						<defaultIndex>0</defaultIndex>
+						<format decimalPlaces="0"/>
+					</quantity>
+				</DataElement>
+			</DataGroup>
+		</definition>
+		<ontology defaultOntology="SNOMED-CT">
+			<termDefinitions>
+				<termDefinition language="en">
+					<item localCode="at0002">
+						<text>Herzfrequenz</text>
+						<description>Herzfrequenz</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0003">
+						<text>PQ Intervall</text>
+						<description>PQ Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0004">
+						<text>QT Intervall</text>
+						<description>QT Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0005">
+						<text>QT Intervall</text>
+						<description>QT Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+				</termDefinition>
+			</termDefinitions>
+			<termBindings>
+				<termBinding terminology="11073 MDC">
+					<binding localCode="at0002" targetCode="MDC_ECG_HEART_RATE"/>
+					<binding localCode="at0003" targetCode="MDC_ECG_TIME_PD_PQ"/>
+					<binding localCode="at0004" targetCode="MDC_ECG_TIME_PD_QT"/>
+				</termBinding>
+			</termBindings>
+			<constraintDefinitions/>
+			<constraintBindings/>
+		</ontology>
+		<presentation>
+			<css/>
+			<header/>
+			<footer/>
+		</presentation>
+	</archetype>
+	<archetype useage="openEHR" published="false">
+		<concept>
+			<identifier>CEN-EN13606-QTc-Interval.v1</identifier>
+			<text/>
+			<nameOfCodingSystem/>
+		</concept>
+		<uses/>
+		<description>
+			<author/>
+			<submission>
+				<organisation>
+					<namespaceID>Medical-Objects</namespaceID>
+					<universalID/>
+					<universalIDType/>
+				</organisation>
+				<date>2011-11-01T10:26:43.781Z</date>
+			</submission>
+			<version>1</version>
+			<status>Draft</status>
+			<revision>1</revision>
+			<diagnosticServiceSection/>
+			<labNumberSuffix/>
+			<confidentialityCode>U</confidentialityCode>
+			<description lang="EN">
+				<purpose>To calculate the correlatet QT interval.</purpose>
+				<use/>
+				<misuse/>
+			</description>
+			<rights/>
+			<xslVersion>0.9</xslVersion>
+			<keyWords/>
+			<universalServiceID identifier="" text="" nameOfCodingSystem="" alternateIdentifier="" alternateText="" nameOfAlternateCodingSystem=""/>
+		</description>
+		<definition>
+			<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="ENTRY" id="at0006" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+				<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="items" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false"/>
+				<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0005" elementType="mtQuantity" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+					<quantity>
+						<HL7Datatypes/>
+						<choices property="">
+							<item units="ms" range=""/>
+						</choices>
+						<defaultIndex>0</defaultIndex>
+						<format decimalPlaces="0"/>
+					</quantity>
+				</DataElement>
+			</DataGroup>
+		</definition>
+		<ontology defaultOntology="SNOMED-CT">
+			<termDefinitions>
+				<termDefinition language="en">
+					<item localCode="at0002">
+						<text>Herzfrequenz</text>
+						<description>Herzfrequenz</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0003">
+						<text>PQ Intervall</text>
+						<description>PQ Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0004">
+						<text>QT Intervall</text>
+						<description>QT Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0005">
+						<text>QTc Intervall</text>
+						<description>QTc Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0006">
+						<text>QTc Intervall</text>
+						<description>QTc Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+				</termDefinition>
+			</termDefinitions>
+			<termBindings>
+				<termBinding terminology="11073 MDC">
+					<binding localCode="at0002" targetCode="MDC_ECG_HEART_RATE"/>
+					<binding localCode="at0003" targetCode="MDC_ECG_TIME_PD_PQ"/>
+					<binding localCode="at0004" targetCode="MDC_ECG_TIME_PD_QT"/>
+					<binding localCode="at0005" targetCode="MDC_ECG_TIME_PD_QT_CORR"/>
+				</termBinding>
+			</termBindings>
+			<constraintDefinitions/>
+			<constraintBindings/>
+		</ontology>
+		<presentation>
+			<css/>
+			<header/>
+			<footer/>
+		</presentation>
+	</archetype>
+	<archetype useage="openEHR" published="false">
+		<concept>
+			<identifier>CEN-EN13606-PP-Interval</identifier>
+			<text>PPInterval</text>
+			<nameOfCodingSystem/>
+		</concept>
+		<uses/>
+		<description>
+			<author/>
+			<submission>
+				<organisation>
+					<namespaceID>Medical-Objects</namespaceID>
+					<universalID/>
+					<universalIDType/>
+				</organisation>
+				<date>2011-11-01T10:26:43.781Z</date>
+			</submission>
+			<version>1</version>
+			<status>Draft</status>
+			<revision>1</revision>
+			<diagnosticServiceSection/>
+			<labNumberSuffix/>
+			<confidentialityCode>U</confidentialityCode>
+			<description lang="EN">
+				<purpose>To detect the PP interval.</purpose>
+				<use/>
+				<misuse/>
+			</description>
+			<rights/>
+			<xslVersion>0.9</xslVersion>
+			<keyWords/>
+			<universalServiceID identifier="" text="" nameOfCodingSystem="" alternateIdentifier="" alternateText="" nameOfAlternateCodingSystem=""/>
+		</description>
+		<definition>
+			<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="ENTRY" id="at0007" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+				<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="items" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false"/>
+				<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0006" elementType="mtQuantity" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+					<quantity>
+						<HL7Datatypes/>
+						<choices property="">
+							<item units="ms" range=""/>
+						</choices>
+						<defaultIndex>0</defaultIndex>
+						<format decimalPlaces="0"/>
+					</quantity>
+				</DataElement>
+			</DataGroup>
+		</definition>
+		<ontology defaultOntology="SNOMED-CT">
+			<termDefinitions>
+				<termDefinition language="en">
+					<item localCode="at0002">
+						<text>Herzfrequenz</text>
+						<description>Herzfrequenz</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0003">
+						<text>PQ Intervall</text>
+						<description>PQ Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0004">
+						<text>QT Intervall</text>
+						<description>QT Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0005">
+						<text>QTc Intervall</text>
+						<description>QTc Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0006">
+						<text>PP Intervall</text>
+						<description>PP Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0007">
+						<text>PP Intervall</text>
+						<description>PP Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+				</termDefinition>
+			</termDefinitions>
+			<termBindings>
+				<termBinding terminology="11073 MDC">
+					<binding localCode="at0002" targetCode="MDC_ECG_HEART_RATE"/>
+					<binding localCode="at0003" targetCode="MDC_ECG_TIME_PD_PQ"/>
+					<binding localCode="at0004" targetCode="MDC_ECG_TIME_PD_QT"/>
+					<binding localCode="at0005" targetCode="MDC_ECG_TIME_PD_QT_CORR"/>
+					<binding localCode="at0006" targetCode="MDC_ECG_TIME_PD_PP_GL"/>
+				</termBinding>
+			</termBindings>
+			<constraintDefinitions/>
+			<constraintBindings/>
+		</ontology>
+		<presentation>
+			<css/>
+			<header/>
+			<footer/>
+		</presentation>
+	</archetype>
+	<archetype useage="openEHR" published="false">
+		<concept>
+			<identifier>CEN-EN13606-RR-Interval.v1</identifier>
+			<text>RR interval</text>
+			<nameOfCodingSystem/>
+		</concept>
+		<uses/>
+		<description>
+			<author/>
+			<submission>
+				<organisation>
+					<namespaceID>Medical-Objects</namespaceID>
+					<universalID/>
+					<universalIDType/>
+				</organisation>
+				<date>2011-11-01T10:26:43.781Z</date>
+			</submission>
+			<version>1</version>
+			<status>Draft</status>
+			<revision>1</revision>
+			<diagnosticServiceSection/>
+			<labNumberSuffix/>
+			<confidentialityCode>U</confidentialityCode>
+			<description lang="EN">
+				<purpose>To detect the RR interval.</purpose>
+				<use/>
+				<misuse/>
+			</description>
+			<rights/>
+			<xslVersion>0.9</xslVersion>
+			<keyWords/>
+			<universalServiceID identifier="" text="" nameOfCodingSystem="" alternateIdentifier="" alternateText="" nameOfAlternateCodingSystem=""/>
+		</description>
+		<definition>
+			<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="ENTRY" id="at0008" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false">
+				<DataGroup visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="items" cardinalityLow="0" cardinalityHigh="20" visibility="visible" choice="false" unique="true" ordered="false" startCollapsed="false" structural="false" bubbleEventsUp="false"/>
+				<DataElement visibleAtStart="true" minOccur="0" maxOccur="1" levelOfDetail="0" openEHR="" id="at0007" elementType="mtQuantity" assumedValue="" hasReferenceRange="false" hasDate="False" referenceRange="">
+					<quantity>
+						<HL7Datatypes/>
+						<choices property="">
+							<item units="ms" range=""/>
+						</choices>
+						<defaultIndex>0</defaultIndex>
+						<format decimalPlaces="0"/>
+					</quantity>
+				</DataElement>
+			</DataGroup>
+		</definition>
+		<ontology defaultOntology="SNOMED-CT">
+			<termDefinitions>
+				<termDefinition language="en">
+					<item localCode="at0002">
+						<text>Herzfrequenz</text>
+						<description>Herzfrequenz</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0003">
+						<text>PQ Intervall</text>
+						<description>PQ Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0004">
+						<text>QT Intervall</text>
+						<description>QT Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0005">
+						<text>QTc Intervall</text>
+						<description>QTc Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0006">
+						<text>PP Intervall</text>
+						<description>PP Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0007">
+						<text>RR Intervall</text>
+						<description>RR Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+					<item localCode="at0008">
+						<text>RR Intervall</text>
+						<description>RR Intervall</description>
+						<provenance/>
+						<qualityControl/>
+					</item>
+				</termDefinition>
+			</termDefinitions>
+			<termBindings>
+				<termBinding terminology="11073 MDC">
+					<binding localCode="at0002" targetCode="MDC_ECG_HEART_RATE"/>
+					<binding localCode="at0003" targetCode="MDC_ECG_TIME_PD_PQ"/>
+					<binding localCode="at0004" targetCode="MDC_ECG_TIME_PD_QT"/>
+					<binding localCode="at0005" targetCode="MDC_ECG_TIME_PD_QT_CORR"/>
+					<binding localCode="at0006" targetCode="MDC_ECG_TIME_PD_PP_GL"/>
+					<binding localCode="at0007" targetCode="MDC_ECG_TIME_PD_RR_GL"/>
+				</termBinding>
+			</termBindings>
+			<constraintDefinitions/>
+			<constraintBindings/>
+		</ontology>
+		<presentation>
+			<css/>
+			<header/>
+			<footer/>
+		</presentation>
+	</archetype>
+</moa:moArchetypes>
