@@ -163,21 +163,21 @@ public class Helper {
 
 
 
-	public static int decideWhichType(Archetype arche, int id, String type, ArrayList<String> choices) {
+	public static int decideWhichType(Archetype arche, int id, String type, ArrayList<String> choices,ArrayList<String> ranges) {
 		if (type.equalsIgnoreCase("mtArchetype")) {
-			Element e = new Element(arche, id, "archetype", choices);
+			Element e = new Element(arche, id, "archetype", choices,ranges);
 			return e.id;
 		} else if (type.equalsIgnoreCase("mtBoolean")) {
-			Element e = new Element(arche, id, "boolean", choices);
+			Element e = new Element(arche, id, "boolean", choices,ranges);
 			return e.id;
 		} else if (type.equalsIgnoreCase("mtQuantity")) {
-			Element e = new Element(arche, id, "int", choices);
+			Element e = new Element(arche, id, "int", choices,ranges);
 			return e.id;
 		} else if (type.equalsIgnoreCase("mtStringlist")) {
-			Element e = new Element(arche, id, "stringlist", choices);
+			Element e = new Element(arche, id, "stringlist", choices,ranges);
 			return e.id;
         } else if (type.equalsIgnoreCase("mtString")) {
-            Element e = new Element(arche, id, "string", choices);
+            Element e = new Element(arche, id, "string", choices,ranges);
             return e.id;
 		} else {
 			return 0;

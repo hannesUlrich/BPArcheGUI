@@ -35,14 +35,14 @@ public class Global extends GlobalSettings {
 
     public void loadInfileArchetypes(String identifier, String filepath) throws  Exception{
         XPathReader reader = new XPathReader(filepath,identifier,false);
-        //String name = Helper.getArcheName(identifier);
+        String name = reader.getName() == null ||  reader.getName().equals("") ? identifier : reader.getName();
         String purpose = reader.getValue("purpose");
         String usage = reader.getValue("use");
         String misusage = reader.getValue("misuse");
-        Archetype arche = new Archetype( identifier, identifier, purpose, usage, misusage);
-        Element ele = Element.find.byId(Helper.decideWhichType(arche ,count++, reader.getElementType(), reader.getChoices()));
+        reader.getRanges();
+        Archetype arche = new Archetype( identifier, name, purpose, usage, misusage);
+        Element ele = Element.find.byId(Helper.decideWhichType(arche ,count++, reader.getElementType(), reader.getChoices(),reader.getRanges()));
         arche.addElement(ele);
-        System.out.println("arche = " + arche);
     }
 
     public void checkingArchetypes() {
@@ -51,17 +51,16 @@ public class Global extends GlobalSettings {
             try {
                 ArchetypeStorage archeStorage = new ArchetypeStorage(Helper.getCurrentDir()+"resource/"+aFile.getName());
                 String id = archeStorage.getIdentifier();
-                String name = Helper.getArcheName(aFile.getName());
+                String name = archeStorage.getName() == null ? id : archeStorage.getName();
                 String purpose = archeStorage.getPurpose();
                 String usage = archeStorage.getUse();
                 String misusage = archeStorage.getMisuse();
                 Archetype arche = new Archetype( id, id, purpose, usage, misusage);
-                Element eleTemp = Element.find.byId(Helper.decideWhichType(arche ,count++, archeStorage.getElementType(), archeStorage.getChoices()));
+                Element eleTemp = Element.find.byId(Helper.decideWhichType(arche ,count++, archeStorage.getElementType(), archeStorage.getChoices(),archeStorage.getRanges()));
                 Element ele = eleTemp;
                 if (eleTemp == null){
                     int nameTmp = count - 1;
-                    ele = new Element(arche,nameTmp,archeStorage.getElementType(),archeStorage.getChoices());
-
+                    ele = new Element(arche,nameTmp,archeStorage.getElementType(),archeStorage.getChoices(),archeStorage.getRanges());
                 }
                 else if (eleTemp.type.equals("archetype")) {
 					ArrayList<String> mods = archeStorage.getUses();

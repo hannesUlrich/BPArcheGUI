@@ -5,11 +5,18 @@ import java.util.ArrayList;
 public class ArchetypeStorage {
 
     private final String use;
+
+    public String getName() {
+        return name;
+    }
+
+    private final String name;
     private final String misuse;
     private final String purpose;
     private final String elementType;
     private final String identifier;
     private ArrayList<String> choices;
+    private ArrayList<String> ranges;
     private ArrayList<String> uses;
 
     public ArchetypeStorage(String path) throws Exception{
@@ -21,6 +28,8 @@ public class ArchetypeStorage {
         elementType = reader.getElementType();
         choices = new ArrayList<>(reader.getChoices());
         uses = new ArrayList<>(reader.getUses());
+        ranges = new ArrayList<>(reader.getRanges());
+        name = reader.getName();
     }
 
     /**
@@ -60,6 +69,10 @@ public class ArchetypeStorage {
 
     public ArrayList<String> getChoices() {
         return choices;
+    }
+
+    public ArrayList<String> getRanges() {
+        return ranges;
     }
 
     public ArrayList<String> getUses() {

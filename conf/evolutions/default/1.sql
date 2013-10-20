@@ -39,6 +39,8 @@ create table daten (
 create table element (
   id                        integer not null,
   type                      varchar(255),
+  min                       integer,
+  max                       integer,
   archetype_id              varchar(255),
   constraint pk_element primary key (id))
 ;

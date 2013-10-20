@@ -39,22 +39,32 @@
                     </select> <br>
                 }
             }
+
+            @if(element.getType.equals("string")) {
+                @element.getArchetype.getName <br>
+                @if(data != null){
+                    <input type="text" name="@element.getId" value="@data.getValue" placeholder="Type here...">
+                }else{
+                    <input type="text" name="@element.getId" placeholder="Type here...">
+                }
+                <br>
+            }
             @if(element.getType.equals("int")) {
                 @element.getArchetype.getName <br>
 
                 @if(data != null) {
 	                @if(loggedInUser.getThemenType==0){
-	                	<input type="number" pattern="[0-9.]+" maxlength="3" min="0" max="200" name="@element.getId" value="@data.getValue">
+	                	<input type="number" pattern="[0-9.]+" min="@element.getMin" max="@element.getMax" name="@element.getId" value="@data.getValue">
 	                } else {
 	               		<input type="number" id="rangeValue1" name="@element.getId" value="@data.getValue" >
-	                	<input type="range" id="slider1" name="@element.getId"  min="0" max="200"  value="@data.getValue" onchange="printValue('slider1','rangeValue1')" name="@element.getId">
+	                	<input type="range" id="slider1" name="@element.getId"  min="@element.getMin" max="@element.getMax"  value="@data.getValue" onchange="printValue('slider1','rangeValue1')" name="@element.getId">
 	                }
                 } else {
                 	@if(loggedInUser.getThemenType==0){ 
-                		<input type="number" pattern="[0-9.]+" min="0" max="200" maxlength="3" name="@element.getId" value="0">
+                		<input type="number" pattern="[0-9.]+" min="@element.getMin" max="@element.getMax" name="@element.getId" value="@element.getMin">
                 	} else {
                 		<input type="number" id="rangeValue1" name="@element.getId" >
-                		<input type="range" id="slider1" name="@element.getId" value="100" min="0" max="200"  onchange="printValue('slider1','rangeValue1')" pattern="[0-9.]+" maxlength="3" name="@element.getId" value="0">
+                		<input type="range" id="slider1" name="@element.getId" value="element.getMin" min="@element.getMin" max="@element.getMax"  onchange="printValue('slider1','rangeValue1')" pattern="[0-9.]+" name="@element.getId">
                 	}
                 }
                 @if(!element.getChoices.isEmpty) {
@@ -98,8 +108,8 @@
         </div>
         <div class="row">
             @if(Application.allDataInDB(arche)){
-                BMI: @Application.calculateBMI() <br>
-                @play.i18n.Messages.get("submit") @Application.getPhysician
+                <br>
+                @play.i18n.Messages.get("stored")
             }
         </div>
 

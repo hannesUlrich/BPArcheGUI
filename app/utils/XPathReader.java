@@ -57,21 +57,27 @@ public class XPathReader {
     }
 
     public String getIdentifier() throws Exception{
-        xPathExpression = xPath.compile("//archetype[./concept/identifier='" + identifier + "']//identifier");
+        xPathExpression = xPath.compile("//archetype[concept/identifier='" + identifier + "']/concept/identifier");
+        String value = xPathExpression.evaluate(
+                xmlDocument, XPathConstants.STRING).toString();
+        return value;
+    }
+    public String getName() throws Exception{
+        xPathExpression = xPath.compile("//archetype[concept/identifier='" + identifier + "']/concept/text");
         String value = xPathExpression.evaluate(
                 xmlDocument, XPathConstants.STRING).toString();
         return value;
     }
 
     public String getValue(String tag) throws Exception{
-        xPathExpression = xPath.compile("//archetype[./concept/identifier='" + identifier + "']//description/" + tag);
+        xPathExpression = xPath.compile("//archetype[concept/identifier='" + identifier + "']/descendant::description/" + tag);
         String value = xPathExpression.evaluate(
                 xmlDocument, XPathConstants.STRING).toString();
         return value;
     }
 
     public String getElementType() throws Exception{
-        xPathExpression = xPath.compile("//archetype[./concept/identifier='" + identifier + "']//DataElement/@elementType");
+        xPathExpression = xPath.compile("//archetype[concept/identifier='" + identifier + "']/descendant::DataElement/@elementType");
         String value = xPathExpression.evaluate(
                 xmlDocument, XPathConstants.STRING).toString();
         return value;
@@ -80,7 +86,7 @@ public class XPathReader {
 
     public ArrayList<String> getChoices() throws Exception{
         ArrayList<String> list = new ArrayList<>();
-        xPathExpression = xPath.compile("//archetype[//concept[identifier='" + identifier + "']]//choices/item");
+        xPathExpression = xPath.compile("//archetype[concept/identifier='" + identifier + "']/descendant::choices/item");
         NodeList nodeListBook = (NodeList) xPathExpression.evaluate(
                 xmlDocument, XPathConstants.NODESET);
 
@@ -90,17 +96,17 @@ public class XPathReader {
                 list.add(value);
             }
         }
+        return list;
+    }
 
-        XPathExpression xPathExpression2 = xPath.compile("../archetype[//concept[identifier='" + identifier + "']]//choices/item");
-        NodeList nodeListBook2 = (NodeList) xPathExpression2.evaluate(
+    public ArrayList<String> getRanges() throws Exception{
+        ArrayList<String> list = new ArrayList<>();
+        xPathExpression = xPath.compile("//archetype[concept/identifier='" + identifier + "']/descendant::choices/item/@range");
+        NodeList nodeListBook = (NodeList) xPathExpression.evaluate(
                 xmlDocument, XPathConstants.NODESET);
-        ArrayList<String> list2 = new ArrayList<>();
-        for (int index = 0; index < nodeListBook2.getLength(); index++) {
-            String value = nodeListBook2.item(index).getAttributes().item(nodeListBook2.item(index).getAttributes().getLength()-1).getTextContent();
-            if (value != null && !value.equals("")){
-                System.out.println("value = " + value);
-                list2.add(value);
-            }
+        for (int index = 0; index < nodeListBook.getLength(); index++) {
+            String value = nodeListBook.item(index).getTextContent();
+            list.add(value);
         }
         return list;
     }

@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
+import utils.Helper;
 
 @Entity
 public class Element extends Model {
@@ -19,6 +20,8 @@ public class Element extends Model {
 	@Id
 	public int id;
 	public String type;
+    public int min;
+    public int max;
 
 
 
@@ -30,7 +33,7 @@ public class Element extends Model {
 	@OneToMany
 	public List<Choice> choices;
 
-	public Element(Archetype arche, int name, String type, ArrayList<String> choices) {
+	public Element(Archetype arche, int name, String type, ArrayList<String> choices, ArrayList<String> ranges) {
 		this.id = name;
 		this.type = type;
 		this.archetype = arche;
@@ -39,6 +42,17 @@ public class Element extends Model {
 			Choice temp = new Choice(count++,text,this);
 			addChoice(temp);
 		}
+        for (String minmax : ranges) {
+            if (minmax.equals("") || minmax == null){
+                min = 0;
+                max = 200;
+                continue;
+            }
+            System.out.println("minmax = " + minmax);
+            String[] rangeArray = minmax.split("-");
+            min = rangeArray[0] == null || rangeArray[0].equals("") || !Helper.isInteger(rangeArray[0]) ? 0 : Integer.parseInt(rangeArray[0]);
+            max = rangeArray[1] == null || rangeArray[1].equals("") || !Helper.isInteger(rangeArray[1]) ? 200 : Integer.parseInt(rangeArray[1]);
+        }
 		save();
 	}
 
@@ -64,6 +78,14 @@ public class Element extends Model {
 	public String getType() {
 		return type;
 	}
+
+    public int getMin() {
+        return min;
+    }
+
+    public int getMax() {
+        return max;
+    }
 
 	public void setType(String type) {
 		this.type = type;
