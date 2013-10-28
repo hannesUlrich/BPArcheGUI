@@ -18,6 +18,10 @@ import views.html.showForm;
 
 public class Application extends Controller {
 
+    /**
+     * Renders Index Page
+     * @return HTML Index Page
+     */
     @Security.Authenticated(Secured.class)
     public static Result index() {
         response().setCookie("user", request().username());
@@ -26,11 +30,21 @@ public class Application extends Controller {
         return ok(index.render(benutzer, names));
     }
 
+    /**
+     * Renders dialog for Archetype
+     * @param archetypeId Archetype's ID
+     * @return HTML text for dialog
+     */
     public static Result showArchetypeModal(String archetypeId) {
         Archetype arche = Archetype.find.byId(archetypeId);
         return ok(modalRemote.render(arche));
     }
 
+    /**
+     *
+     * @param archetypeID Archetype's ID
+     * @return HTML page for Archetype
+     */
     public static Result showForm(String archetypeID) {
         Archetype arche = Archetype.find.byId(archetypeID);
         Benutzer benutzer = Benutzer.find.byId(session("accountname"));
@@ -38,12 +52,20 @@ public class Application extends Controller {
         return ok(showForm.render(benutzer, names, arche));
     }
 
+    /**
+     * Logout
+     * @return HTML Login Page
+     */
     public static Result logout() {
         session().clear();
         flash("success", "You've been logged out.");
         return redirect(routes.LoginController.login());
     }
 
+    /**
+     * Changes active Theme
+     * @return HTML Index Page
+     */
     public static Result changeThemen() {
     	Benutzer benutzer = Benutzer.find.byId(session("accountname"));
     	if (benutzer.getThemenType() == 0 ) {
@@ -55,6 +77,11 @@ public class Application extends Controller {
         return ok(index.render(benutzer, names));
     }
 
+    /**
+     * Saves the Archetype Data
+     * @param archeID Archetype's ID
+     * @return HTML active Archetype Page
+     */
     public static Result saveForm(String archeID) {
         DynamicForm dynForm = Form.form().bindFromRequest();
         Archetype arche = Archetype.find.byId(archeID);
@@ -84,17 +111,24 @@ public class Application extends Controller {
                 }
             }
         }
-//        new Daten(session("accountname"), arche, dynForm.get(String.valueOf(arche.getElements().get(0).getId())), dynForm.get("choice"));
-//
         flash("saved", "Data has been saved succesfully.");
         return redirect(routes.Application.showForm(archeID));
     }
 
-
+    /**
+     * Checks if the data is saved in Database
+     * @param arche Archetype
+     * @return true or false
+     */
     public static boolean dataInDB(Archetype arche) {
         return Daten.find.where().eq("archetype", arche).eq("userID", session("accountname")).findList().size() > 0;
     }
 
+    /**
+     * Checks if all data used by this archetype is saved in database
+     * @param arche
+     * @return true or false
+     */
     public static boolean allDataInDB(Archetype arche) {
         for (String archeID : arche.getUsedArchetypes()) {
             if (!dataInDB(Archetype.find.byId(archeID))) {
@@ -104,37 +138,12 @@ public class Application extends Controller {
         return true;
     }
 
+    /**
+     * reads all saved data by this archetype from the database
+     * @param arche
+     * @return daten
+     */
     public static Daten getDataFromDB(Archetype arche) {
         return Daten.find.where().eq("archetype", arche).eq("userID", session("accountname")).findUnique();
-    }
-
-
-    /**
-     * BMI = m/l^2
-     * @return
-     */
-    public static int calculateBMI() {
-        Daten d = Daten.find.where().eq("archetype.name", "PatientBodyWeight").eq("userID", session("accountname")).findUnique();
-        double m = Double.valueOf(d.getValue());
-        if (d.getSelected().equals("lb")){
-            m *= 0.45359237;
-        }
-
-        d = Daten.find.where().eq("archetype.name","PatientBodyHeight").eq("userID",session("accountname")).findUnique();
-        double l = Double.valueOf(d.getValue());
-        if (d.getSelected().equals("foot")){
-            l *= 0.3048;
-        }else{
-            l /= 100;
-        }
-
-        return (int) (m/(l*l));
-    }
-
-    public static String getPhysician() {
-        Daten d = Daten.find.where().eq("archetype.name","Physician").eq("userID",session("accountname")).findUnique();
-        int physicianIndex = Integer.valueOf(d.getValue());
-        Archetype type = d.getArchetype();
-        return type.getElements().get(0).getChoices().get(physicianIndex).getChoice();
     }
 }

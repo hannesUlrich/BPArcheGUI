@@ -27,6 +27,12 @@ public class XPathReader {
         identifier = execWithFile ?  Helper.extractFileNameWithoutEnding(filePath) : id;
     }
 
+    /**
+     * constructor of the xml reader
+     * uses xpath for parsing
+     * @param path loads a xml file with the given path
+     * @throws Exception throw any exception that occurs
+     */
     public XPathReader(String path) throws  Exception{
         // loading the XML document from a file
         DocumentBuilderFactory builderfactory = DocumentBuilderFactory
@@ -43,6 +49,11 @@ public class XPathReader {
         identifier = Helper.extractFileNameWithoutEnding(path);
     }
 
+    /**
+     * performs xpath for getting the uses of an archetype
+     * @return arraylist of string that contains the uses
+     * @throws Exception
+     */
     public ArrayList<String> getUses() throws Exception{
         ArrayList<String> list = new ArrayList<>();
         xPathExpression = xPath.compile("//archetype[//concept[identifier='" + identifier + "']]/uses/use");
@@ -56,12 +67,23 @@ public class XPathReader {
         return list;
     }
 
+    /**
+     * performs xpath for getting the identifier of an archetype
+     * @return returns the identifier
+     * @throws Exception
+     */
     public String getIdentifier() throws Exception{
         xPathExpression = xPath.compile("//archetype[concept/identifier='" + identifier + "']/concept/identifier");
         String value = xPathExpression.evaluate(
                 xmlDocument, XPathConstants.STRING).toString();
         return value;
     }
+
+    /**
+     * performs xpath for getting the name / text of an archetype
+     * @return returns the name
+     * @throws Exception
+     */
     public String getName() throws Exception{
         xPathExpression = xPath.compile("//archetype[concept/identifier='" + identifier + "']/concept/text");
         String value = xPathExpression.evaluate(
@@ -69,6 +91,12 @@ public class XPathReader {
         return value;
     }
 
+    /**
+     * performs xpath for getting a specific value of an archetype
+     * @param tag enter misuse, use or purpose
+     * @return returns the specific value
+     * @throws Exception
+     */
     public String getValue(String tag) throws Exception{
         xPathExpression = xPath.compile("//archetype[concept/identifier='" + identifier + "']/descendant::description/" + tag);
         String value = xPathExpression.evaluate(
@@ -76,6 +104,11 @@ public class XPathReader {
         return value;
     }
 
+    /**
+     * performs xpath for getting the element type of an archetype
+     * @return returns the element type
+     * @throws Exception
+     */
     public String getElementType() throws Exception{
         xPathExpression = xPath.compile("//archetype[concept/identifier='" + identifier + "']/descendant::DataElement/@elementType");
         String value = xPathExpression.evaluate(
@@ -83,7 +116,11 @@ public class XPathReader {
         return value;
     }
 
-
+    /**
+     * performs xpath for getting the choices of an archetype
+     * @return returns the choices or empty list
+     * @throws Exception
+    */
     public ArrayList<String> getChoices() throws Exception{
         ArrayList<String> list = new ArrayList<>();
         xPathExpression = xPath.compile("//archetype[concept/identifier='" + identifier + "']/descendant::choices/item");
@@ -99,6 +136,11 @@ public class XPathReader {
         return list;
     }
 
+    /**
+     * performs xpath for getting the ranges of an archetype
+     * @return returns the ranges or empty list
+     * @throws Exception
+     */
     public ArrayList<String> getRanges() throws Exception{
         ArrayList<String> list = new ArrayList<>();
         xPathExpression = xPath.compile("//archetype[concept/identifier='" + identifier + "']/descendant::choices/item/@range");

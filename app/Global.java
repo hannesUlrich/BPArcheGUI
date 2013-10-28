@@ -33,6 +33,12 @@ public class Global extends GlobalSettings {
         }
     }
 
+    /**
+     * save new elements (archetypes) if the given archetype has several uses
+     * @param identifier new archetype id
+     * @param filepath path to parent archetype
+     * @throws Exception
+     */
     public void loadInfileArchetypes(String identifier, String filepath) throws  Exception{
         XPathReader reader = new XPathReader(filepath,identifier,false);
         String name = reader.getName() == null ||  reader.getName().equals("") ? identifier : reader.getName();
@@ -45,6 +51,9 @@ public class Global extends GlobalSettings {
         arche.addElement(ele);
     }
 
+    /**
+     * store every archetype represented in xml files
+     */
     public void checkingArchetypes() {
     	ArrayList<File> files = Helper.getFiles(new File(Helper.getCurrentDir()+"resource/"));
 		for (File aFile : files) {

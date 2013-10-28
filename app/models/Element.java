@@ -48,7 +48,6 @@ public class Element extends Model {
                 max = 200;
                 continue;
             }
-            System.out.println("minmax = " + minmax);
             String[] rangeArray = minmax.split("-");
             min = rangeArray[0] == null || rangeArray[0].equals("") || !Helper.isInteger(rangeArray[0]) ? 0 : Integer.parseInt(rangeArray[0]);
             max = rangeArray[1] == null || rangeArray[1].equals("") || !Helper.isInteger(rangeArray[1]) ? 200 : Integer.parseInt(rangeArray[1]);

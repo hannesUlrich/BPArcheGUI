@@ -5,19 +5,20 @@ import play.data.*;
 import play.mvc.*;
 import views.html.*;
 
-/**
- * Created with IntelliJ IDEA.
- * Benutzer: Crassus
- * Date: 08.06.13
- * Time: 12:12
- * To change this template use File | Settings | File Templates.
- */
 public class LoginController extends Controller{
 
+    /**
+     * Performs Login
+     * @return Login HTML Page
+     */
     public static Result login() {
         return ok(login.render(Form.form(Login.class)));
     }
 
+    /**
+     * Checks if Login-Form has no errors
+     * @return HTML Page login if Loginform has Errors else Main page
+     */
     public static Result authenticate(){
         Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
         if (loginForm.hasErrors()) {
@@ -31,10 +32,18 @@ public class LoginController extends Controller{
         }
     }
 
+    /**
+     * Redirects to the Register-Form
+     * @return HTML Page Register
+     */
     public static Result showRegister(){
         return ok(register.render(Form.form(Register.class)));
     }
 
+    /**
+     * Registers a new user
+     * @return Html Page Index
+     */
     public static Result register(){
         Form<Register> loginForm = Form.form(Register.class).bindFromRequest();
         if (loginForm.hasErrors()) {

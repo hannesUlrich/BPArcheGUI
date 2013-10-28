@@ -19,6 +19,11 @@ public class ArchetypeStorage {
     private ArrayList<String> ranges;
     private ArrayList<String> uses;
 
+    /**
+     * saves the values of an archetype xml file
+     * @param path path to archetype
+     * @throws Exception
+     */
     public ArchetypeStorage(String path) throws Exception{
         XPathReader reader = new XPathReader(path);
         use = reader.getValue("use");
